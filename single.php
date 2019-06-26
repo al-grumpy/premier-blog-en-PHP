@@ -1,7 +1,8 @@
 <?php
-
+//appel des fichiers utiles à la page single
 require 'Database.php';
 require 'Article.php';
+require 'Comment.php'
 ?>
 
 <!DOCTYPE html>
@@ -27,11 +28,27 @@ require 'Article.php';
                 <p>Crée le : <?= htmlspecialchars($data['date_added']);?></p>  
             </div>
         <br>
-        <?php
+        <?php //penser à modifier class comment_article dans css pour affichage comments
         
         $articles->closeCursor();
         ?>
-        <a href="home.php">Retour à la page accueil</a>
+        <a href="home.php">Retour à la page accueil</a> 
+        <div id="comments" class="comment_article">
+            <h3>Commentaires</h3>
+            <?php
+            $comment = new Comment();
+            $comments = $comment->getCommentsFromArticle($_GET['idArt']);
+            while($datas = $comments->fetch())
+            {
+                ?>
+                <h4><?= htmlspecialchars($datas['pseudo']);?></h4>
+                <p><?= hhtmlspecialchars($datas['content']);?></p>
+                <p>Posté le <?= htmlspecialchars($datas['date_added']);?></p>
+                <?php
+            }
+            $comments->closeCursor();
+            ?>
+        </div>
     </div>
 </body>
 </html>
