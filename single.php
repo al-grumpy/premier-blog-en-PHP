@@ -1,5 +1,5 @@
 <?php
-//Ici le fichier dont on a besoin (à la racine du site)
+
 require 'Database.php';
 require 'Article.php';
 ?>
@@ -17,21 +17,21 @@ require 'Article.php';
         <p>C'est vide, mais ça va venir!</p>
         <?php 
         $article = new Article();
-        $articles = $article->getArticles();
-        while($data = $articles->fetch())
-        {
+        $article = $article->getArticle($_GET['idArt']); 
+        $data = $article->fetch()
         ?>
             <div>
-                <h2><a href="single.php?idArt=<?= htmlspecialchars($data['id']);?>"><?=htmlspecialchars($data['title']);?></a></h2>
-                <p><?= htmlspecialchars($data['chapo']);?></p>
+                <h2><?= htmlspecialchars($data['title']);?></h2>
+                <p><?= htmlspecialchars($data['content']);?></p>
                 <p><?= htmlspecialchars($data['author']);?></p>
-                <p>Créé le : <?= htmlspecialchars($data['date_added']);?></p>
+                <p>Crée le : <?= htmlspecialchars($data['date_added']);?></p>  
             </div>
         <br>
         <?php
-        }
+        
         $articles->closeCursor();
         ?>
+        <a href="home.php">Retour à la page accueil</a>
     </div>
 </body>
 </html>
