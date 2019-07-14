@@ -2,6 +2,7 @@
 //on inclut le fichier dont on a besoin
 require 'Database.php';
 require 'Article.php';
+require 'Comment.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +17,6 @@ require 'Article.php';
         <h1>Blog en PHP</h1>
         <p>En construction</p>
         <?php
-        $db = new Database();
-        echo $db->getConnection();
         $article = new Article();
         $article = $article->getArticle($_GET['idArt']);
         $data = $article->fetch();
@@ -33,6 +32,22 @@ require 'Article.php';
         $article->closeCursor();
         ?>
         <a href="home.php">Retour à la liste des articles</a>
+        <div id="comments" class="text-left" style="margin-left: 50px">
+            <h3>Commentaires :</h3>
+            <?php
+            $comment = new Comment();
+            $comments = $comment->getCommentsFromArticle($_GET['idArt']);
+            while($datas = $comments->fetch())
+            {
+                ?>
+                <h4><?= htmlspecialchars($datas['pseudo']);?></h4>
+                <p><?= htmlspecialchars($datas['content']);?></p>
+                <p>Posté le <?= htmlspecialchars($datas['date_added']);?></p>
+                <?php
+            }
+            $comments->closeCursor();
+            ?>
+        </div>
     </div>
 </body>
 </html>
