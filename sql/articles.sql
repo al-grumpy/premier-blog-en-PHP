@@ -8,9 +8,9 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `article` (`id`,`title`,`chapo`,`content`,`author`,`date_added`) VALUES
-(1, 'Premier article à trouver!', 'du texte pour présenter le présenter', 'son contenu, à réfléchir comment mettre en page', 'Alexia Seurot', '2019-06-24'),
-(2, 'deuxième article à trouver', 'je ne sais pas du tout quoi mettre, mais il va falloir trouver!', 'le contenu de ce que je ne sais pas quoi mettre, mais que je vais trouver!!!', 'Alexia Seurot', '2019-06-24'),
-(3, 'troisième article à trouver!', 'La peur est le chemin vers le côté obscur', 'la peur mène à la colère, la colère mène à la haine, la haine ... mène à la souffrance.', 'Alexia Seurot', '2019-06-24');
+(1, 'Premier article', 'texte de présentation 1er article', 'contenu du premier article', 'Alexia Seurot', '2019-06-24'),
+(2, 'deuxième article', 'texte de présentation 2ème article', 'contenu du 2ème article', 'Alexia Seurot', '2019-06-24'),
+(3, 'troisième article', 'texte de présentation 3ème article', 'contenu du 3ème article', 'Alexia Seurot', '2019-06-24');
 
 ALTER TABLE `article`
 ADD PRIMARY KEY (`id`);

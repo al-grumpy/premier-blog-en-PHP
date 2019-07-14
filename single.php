@@ -1,0 +1,38 @@
+<?php
+//on inclut le fichier dont on a besoin
+require 'Database.php';
+require 'Article.php';
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf8">
+    <title>Blog en PHP</title>
+</head>
+    
+<body>
+    <div>
+        <h1>Blog en PHP</h1>
+        <p>En construction</p>
+        <?php
+        $db = new Database();
+        echo $db->getConnection();
+        $article = new Article();
+        $article = $article->getArticle($_GET['idArt']);
+        $data = $article->fetch();
+        ?>
+            <div>
+                <h2><?= htmlspecialchars($data['title']);?></h2>
+                <p><?= htmlspecialchars($data['content']);?></p>
+                <p><?= htmlspecialchars($data['author']);?></p>
+                <p>Créé le : <?= htmlspecialchars($data['date_added']);?></p>
+            </div>
+<br>
+        <?php
+        $article->closeCursor();
+        ?>
+        <a href="home.php">Retour à la liste des articles</a>
+    </div>
+</body>
+</html>

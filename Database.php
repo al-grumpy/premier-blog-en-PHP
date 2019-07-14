@@ -6,26 +6,31 @@ abstract class Database
     const DB_USER = 'root';
     const DB_PASS = '';
     
+    
     private $connection;
     
     private function checkConnection()
     {
+        //Vérifie si la connexion est nulle et fait appel à getConnection()
         if($this->connection === null) {
             return $this->getConnection();
         }
+        //Si la connexion existe, elle est renvoyée, pas besoin de refaire une connexion
         return $this->connection;
+        
     }
     
     //Méthode de connexion à la BdD
     private function getConnection()
     {
+        //Tentative de connexion a la BdD
         try{
-            $this->connection = new PDO(self::DB_HOST, self::DB_USER , self::DB_PASS); 
+            $this->connection = new PDO(self::DB_HOST, self::DB_USER, self::DB_PASS);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //Renvoi de la connexion
+            //Renvoi de la connexion
             return $this->connection;
         }
-        
+        //On lève une erreur si la connexion échoue
         catch(Exception $errorConnection)
         {
             die ('Erreur de connection :'.$errorConnection->getMessage());
