@@ -1,7 +1,7 @@
 <?php
 //on inclut le fichier dont on a besoin
-require 'Database.php';
-require 'Article.php';
+require '../src/DAO/DAO.php';
+require '../src/DAO/ArticleDAO.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ require 'Article.php';
         <h1>Blog en PHP</h1>
         <p>En construction</p>
         <?php
-        $article = new Article();
+        $article = new ArticleDAO();
         $articles = $article->getArticles();
         while($data = $articles->fetch())
         {
