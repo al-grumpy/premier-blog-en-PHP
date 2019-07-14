@@ -1,8 +1,8 @@
 <?php
-//on inclut le fichier dont on a besoin
-require '../src/DAO/DAO.php';
-require '../src/DAO/ArticleDAO.php';
-require '../src/DAO/CommentDAO.php';
+//on fait appel à l'Autoloader
+require '../config/Autoloader.php';
+\App\config\Autoloader::register();
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ require '../src/DAO/CommentDAO.php';
         <h1>Blog en PHP</h1>
         <p>En construction</p>
         <?php
-        $article = new ArticleDAO();
+        $article = new \App\src\DAO\ArticleDAO();
         $article = $article->getArticle($_GET['idArt']);
         $data = $article->fetch();
         ?>

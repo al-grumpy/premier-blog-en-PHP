@@ -1,5 +1,7 @@
 <?php
 
+namespace App\src\DAO;
+
 class CommentDAO extends DAO
 {
     public function getCommentsFromArticle($idArt)
