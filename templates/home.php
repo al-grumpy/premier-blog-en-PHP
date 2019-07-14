@@ -1,10 +1,3 @@
-<?php
-//on fait appel à l'Autoloader
-require '../config/Autoloader.php';
-\App\config\Autoloader::register();
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,7 +16,7 @@ require '../config/Autoloader.php';
         {
         ?>
             <div>
-                <h2><a href="single.php?idArt=<?= htmlspecialchars($data['id']);?>"><?= htmlspecialchars($data['title']);?></a></h2>
+                <h2><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($data['id']);?>"><?= htmlspecialchars($data['title']);?></a></h2>
                 <p><?= htmlspecialchars($data['chapo']);?></p>
                 <p><?= htmlspecialchars($data['author']);?></p>
                 <p>Créé le : <?= htmlspecialchars($data['date_added']);?></p>
