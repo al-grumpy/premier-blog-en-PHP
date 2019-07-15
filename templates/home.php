@@ -10,9 +10,8 @@
         <h1>Blog en PHP</h1>
         <p>En construction</p>
         <?php
-        $article = new \App\src\DAO\ArticleDAO();
-        $articles = $article->getArticles();
-        while($data = $articles->fetch())
+        
+        while($data = $article->fetch())
         {
         ?>
             <div>
@@ -24,7 +23,7 @@
 <br>
         <?php
         }
-        $articles->closeCursor();
+        $article->closeCursor();
         ?>
     </div>
 </body>
