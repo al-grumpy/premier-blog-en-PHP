@@ -10,7 +10,7 @@
         <h1>Blog en PHP</h1>
         <p>En construction</p>
         <?php
-        $data = $article->fetch();
+        $data = $articles->fetch();
         ?>
             <div>
                 <h2><?= htmlspecialchars($data['title']);?></h2>
@@ -20,7 +20,7 @@
             </div>
 <br>
         <?php
-        $article->closeCursor();
+        $articles->closeCursor();
         ?>
         <a href="../public/index.php">Retour à la liste des articles</a>
         <div id="comments" class="text-left" style="margin-left: 50px">
