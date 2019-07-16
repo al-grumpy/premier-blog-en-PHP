@@ -1,30 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf8">
-    <title>Blog en PHP</title>
-</head>
-    
-<body>
+<?php
+$this->title = "Acceuil";
+?>
+<h1>Blog en PHP</h1>
+<p>En construction</p>
+<?php
+foreach ($articles as $article)
+{
+?>
     <div>
-        <h1>Blog en PHP</h1>
-        <p>En construction</p>
-        <?php
-        
-        while($data = $article->fetch())
-        {
-        ?>
-            <div>
-                <h2><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($data['id']);?>"><?= htmlspecialchars($data['title']);?></a></h2>
-                <p><?= htmlspecialchars($data['chapo']);?></p>
-                <p><?= htmlspecialchars($data['author']);?></p>
-                <p>Créé le : <?= htmlspecialchars($data['date_added']);?></p>
-            </div>
-<br>
-        <?php
-        }
-        $article->closeCursor();
-        ?>
+        <h2><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>"><?= htmlspecialchars($article->getTitle());?></a></h2>
+        <p><?= htmlspecialchars($article->getChapo());?></p>
+        <p><?= htmlspecialchars($article->getAuthor());?></p>
+        <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
     </div>
-</body>
-</html>
+<br>
+<?php
+}
+?>

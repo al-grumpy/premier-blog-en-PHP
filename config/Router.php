@@ -2,15 +2,18 @@
 
 namespace App\config;
 
+use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
 
 class Router
 {
     private $frontController;
+    private $errorController;
     
     public function __construct()
     {
         $this->frontController = new FrontController();
+        $this->errorController = new ErrorController();
     }
     
     public function run()
@@ -22,7 +25,7 @@ class Router
                     $this->frontController->article($_GET['idArt']);
                 }
                 else{
-                    echo 'page inconnue';
+                    $this->errorController->unknown();
                 }
             }
             else{
@@ -31,7 +34,7 @@ class Router
         }
         catch (Exception $e)
         {
-            echo 'Erreur';
+            $this->errorController->error();
         }
     }
 }
