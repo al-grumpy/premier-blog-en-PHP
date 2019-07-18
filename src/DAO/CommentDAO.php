@@ -19,7 +19,7 @@ class CommentDAO extends DAO
         return $comments;
     }
     
-    private function builObject(array $row)
+    private function buildObject(array $row)
     {
         $comment = new Comment();
         $comment->setId($row['id']);

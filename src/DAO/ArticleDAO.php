@@ -21,7 +21,7 @@ class ArticleDAO extends DAO
     
     public function getArticle($idArt)
     {
-        $sql = 'SELECT id, title, content, author, date_added FROM article WHERE id = ?';
+        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article WHERE id = ?';
         $result = $this->sql($sql, [$idArt]);
         $row = $result->fetch();
         if($row) {
@@ -29,6 +29,14 @@ class ArticleDAO extends DAO
         } else {
             echo 'Aucun article existant avec cet identifiant';
         }
+    }
+    
+    public function addArticle($article)
+    {
+        //Permet de recuperer les variables $title, $content et $author
+        extract($article);
+        $sql = 'INSERT INTO article (title, content, author, date_added) VALUES (?, ?, NOW())';
+        $this->sql($sql, [$title, $content, $author]);
     }
     
     private function buildObject(array $row)
