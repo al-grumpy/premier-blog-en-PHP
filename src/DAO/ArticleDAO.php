@@ -35,8 +35,8 @@ class ArticleDAO extends DAO
     {
         //Permet de recuperer les variables $title, $content et $author
         extract($article);
-        $sql = 'INSERT INTO article (title, content, author, date_added) VALUES (?, ?, NOW())';
-        $this->sql($sql, [$title, $content, $author]);
+        $sql = 'INSERT INTO article (title, chapo, content, author, date_added) VALUES (?, ?, ?, ?, NOW())';
+        $this->sql($sql, [$title, $chapo, $content, $author]);
     }
     
     private function buildObject(array $row)
