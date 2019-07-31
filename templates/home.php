@@ -6,9 +6,10 @@ $this->title = "Acceuil";
 ?>
 <h1>Blog en PHP</h1>
 <p>En construction</p>
+<a href="../public/index.php?route=login">Se connecter</a>
 <?php
 if(isset($_SESSION['add_article'])) {
-    echo '<p>'.$_SESSION['add-article'].'<p>';
+    echo '<p>'.$_SESSION['add_article'].'<p>';
     unset($_SESSION['add_article']);
 }
 ?>

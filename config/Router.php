@@ -30,6 +30,12 @@ class Router
                 else if($_GET['route'] === 'addArticle') {
                     $this->backController->addArticle($_POST);
                 }
+                else if($_GET['route'] === 'addComment') {
+                    $this->backController->addComment($_POST);
+                }
+                else if($_GET['route'] === 'login') {
+                    $this->backController->login();
+                }
                 else{
                     $this->errorController->unknown();
                 }

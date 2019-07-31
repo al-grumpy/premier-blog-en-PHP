@@ -1,0 +1,13 @@
+{
+    "name": "alexia/premier-blog-en-php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Grumpy",
+            "email": "alexiaseurot@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.0"
+    }
+}

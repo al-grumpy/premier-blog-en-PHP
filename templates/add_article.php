@@ -4,10 +4,10 @@ $this->title = "Ajouter un article";
 <h1>Mon blog</h1>
 <p>En construction</p>
 <div>
-    <form method="post" action="../public/index.php?route=addArticle" >
-        <label type="titile">Titre</label><br>
+    <form method="post" action="../public/index.php?route=addArticle">
+        <label type="title">Titre</label><br>
         <input type="text" id="title" name="title" value="<?php
-            if(isset($post['title'])){
+            if(isset($post['title'])){  //Penser à mettre des contraintes dans input form
                 echo $post['title'];}
         ?>"><br>
         <label for="chapo">Chapo</label><br>

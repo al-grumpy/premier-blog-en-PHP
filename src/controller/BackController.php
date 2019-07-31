@@ -2,7 +2,8 @@
 
 namespace App\src\controller;
 
-use App\sr\DAO\ArticleDAO;
+use App\src\DAO\ArticleDAO;
+use App\src\DAO\CommentDAO;
 use App\src\model\View;
 
 class BackController
@@ -26,5 +27,24 @@ class BackController
         $this->view->render('add_article', [
             'post' => $post
         ]);
+    }
+    
+    public function addComment($post)
+    {
+        if(isset($post['submit'])) {
+            $commentDAO = new CommentDAO();
+            $commentDAO->addComment($post);
+            session_start();
+            $_SESSION['add_comment'] = 'Votre commentaire a bien été ajouté';
+            header('Location: ../public/index.php');
+        }
+        $this->view->render('add_comment', [
+            'post' => $post
+        ]);
+    }
+    
+    public function login()
+    {
+        
     }
 }

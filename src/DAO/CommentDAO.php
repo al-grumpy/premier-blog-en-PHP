@@ -10,13 +10,21 @@ class CommentDAO extends DAO
     {
         $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ?';
         $result = $this->sql($sql, [$idArt]);
-        $comment = [];
+        $comments = [];
         foreach ($result as $row) {
             $commentId = $row['id'];
             $comments[$commentId] = $this->buildObject($row);
         }
         
         return $comments;
+    }
+    
+    public function addComment($post)
+    {
+        //Permet de recuperer les variables $title, $content et $author
+        extract($comment);
+        $sql = 'INSERT INTO comment (pseudo, content, article_id, date_added) VALUES (?, ?, ?, NOW())';
+        $this->sql($sql, [$pseudo, $content, $article_id, $date_added]);
     }
     
     private function buildObject(array $row)
