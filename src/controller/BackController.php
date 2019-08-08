@@ -35,14 +35,13 @@ class BackController
             $commentDAO = new CommentDAO();
             $commentDAO->addComment($post);
             session_start();
-            $_SESSION['add_comment'] = 'Votre commentaire a bien été ajouté';
-            header('Location: ../public/index.php');
+            $_SESSION['add_comment'] = 'votre commentaire à bien été posté !';
+            header('Location: ../public/single.php&idArt');
         }
         $this->view->render('add_comment', [
             'post' => $post
         ]);
     }
-    
     public function login()
     {
         

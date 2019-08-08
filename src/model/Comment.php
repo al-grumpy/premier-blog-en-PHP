@@ -9,6 +9,8 @@ class Comment
     private $pseudo;
     
     private $content;
+
+    private $articleId;
     
     private $dateAdded;
 
@@ -58,6 +60,22 @@ class Comment
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleId()
+    {
+        return $this->articleId;
+    }
+
+    /**
+     * @param mixed $articleId
+     */
+    public function setArticleId($articleId)
+    {
+        $this->articleId = $articleId;
     }
 
     /**

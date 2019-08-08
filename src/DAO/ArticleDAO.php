@@ -38,7 +38,7 @@ class ArticleDAO extends DAO
         $sql = 'INSERT INTO article (title, chapo, content, author, date_added) VALUES (?, ?, ?, ?, NOW())';
         $this->sql($sql, [$title, $chapo, $content, $author]);
     }
-    
+
     private function buildObject(array $row)
     {
         $article = new Article();

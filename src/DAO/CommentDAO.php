@@ -19,13 +19,14 @@ class CommentDAO extends DAO
         return $comments;
     }
     
-    public function addComment($post)
+    public function addComment($comment)
     {
         //Permet de recuperer les variables $title, $content et $author
         extract($comment);
-        $sql = 'INSERT INTO comment (pseudo, content, article_id, date_added) VALUES (?, ?, ?, NOW())';
-        $this->sql($sql, [$pseudo, $content, $article_id, $date_added]);
+        $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added) VALUES (?, ?, ?, NOW())';
+        $this->sql($sql, [$pseudo, $content]);
     }
+    
     
     private function buildObject(array $row)
     {
