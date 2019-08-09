@@ -1,15 +1,18 @@
 <?php
+include 'vendor/autoload.php';
 session_start();
 ?>
 <?php
+
 $this->title = "Acceuil";
 ?>
 <a href="../public/index.php?route=login">Se connecter</a>
 <?php
+//SESSION AJOUT Article (a basculer dans systeme admin)
 if(isset($_SESSION['add_article'])) {
     echo '<p>'.$_SESSION['add_article'].'<p>';
     unset($_SESSION['add_article']);
-}
+} 
 ?>
 <a href="../public/index.php?route=addArticle">Ajouter un article</a>
 <?php

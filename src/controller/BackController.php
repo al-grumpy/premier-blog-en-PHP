@@ -36,7 +36,7 @@ class BackController
             $commentDAO->addComment($post);
             session_start();
             $_SESSION['add_comment'] = 'votre commentaire à bien été posté !';
-            header('Location: ../public/single.php&idArt');
+            header('Location: ../public/index.php?route=article&idArt='.$post['article_id']);
         }
         $this->view->render('add_comment', [
             'post' => $post
