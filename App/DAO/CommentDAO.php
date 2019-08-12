@@ -1,8 +1,8 @@
 <?php
 
-namespace App\src\DAO;
+namespace App\DAO;
 
-use App\src\model\Comment;
+use App\Model\Comment;
 
 class CommentDAO extends DAO
 {

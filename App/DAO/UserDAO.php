@@ -1,8 +1,8 @@
 <?php
 
-namespace App\src\DAO;
+namespace App\DAO;
 
-use App\src\model\User;
+use App\Model\User;
 
 class UserDAO extends DAO
 {

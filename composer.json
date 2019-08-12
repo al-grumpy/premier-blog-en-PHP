@@ -12,7 +12,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\":"../App/"
+            "App\\": "App",
+            "App\\Router\\": "Router",
+            "App\\Controller\\": "Controller",
+            "App\\DAO\\": "DAO",
+            "App\\Model\\": "Model"
         }
     }
 }

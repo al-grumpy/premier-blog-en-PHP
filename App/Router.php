@@ -1,10 +1,10 @@
 <?php
 
-namespace App\config;
+namespace App\Router;
 
-use App\src\controller\BackController;
-use App\src\controller\ErrorController;
-use App\src\controller\FrontController;
+use App\Controller\BackController;
+use App\Controller\ErrorController;
+use App\Controller\FrontController;
 
 class Router
 {

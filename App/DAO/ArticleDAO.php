@@ -1,8 +1,8 @@
 <?php
 
-namespace App\src\DAO;
+namespace App\DAO;
 
-use App\src\model\Article;
+use App\Model\Article;
 
 class ArticleDAO extends DAO
 {
