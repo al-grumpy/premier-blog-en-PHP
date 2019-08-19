@@ -1,17 +1,16 @@
 <?php
 
-require '../config/dev.php';
+require '../App/dev.php';
 require '../vendor/autoload.php';
 
-$router = new \App\config\Router();
-$router->run();
+
 
 //Routing
-//$page = 'home';
+$page = 'home';
 
-//if (isset($_GET['p'])) {
- //   $page = $_GET['p'];
-//}
+if (isset($_GET['p'])) {
+    $page = $_GET['p'];
+}
 
 //Récupère les derniers articles
 function articles() {

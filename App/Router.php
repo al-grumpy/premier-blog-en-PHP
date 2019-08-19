@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Router;
+namespace App\config\Router;
 
 use App\Controller\BackController;
 use App\Controller\ErrorController;
