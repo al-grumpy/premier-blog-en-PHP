@@ -1,21 +1,21 @@
 <?php
 session_start();
-if(isset($_POST['mail']) && isset($_POST['password']))
+if(isset($_POST['pseudo']) && isset($_POST['password']))
 {
-    $mail = mysqli_real_escape_string($db,htmlspecialchars($_POST['mail'])); 
-    $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password']));
+    $pseudo = mysqli_real_escape_string(htmlspecialchars($_POST['mail'])); 
+    $password = mysqli_real_escape_string(htmlspecialchars($_POST['password']));
     
-    if($mail !== "" && $password !== "")
+    if($pseudo !== "" && $password !== "")
     {
         $requete = "SELECT count(*) FROM user where 
-              mail = '".$mail."' and mot_de_passe = '".$password."' ";
-        $exec_requete = mysqli_query($db,$requete);
+              pseudo = '".$pseudo."' and password = '".$password."' ";
+        $exec_requete = mysqli_query($requete);
         $reponse      = mysqli_fetch_array($exec_requete);
         $count = $reponse['count(*)'];
         if($count!=0) // nom d'utilisateur et mot de passe correctes
         {
-           $_SESSION['username'] = $username;
-           header('Location: index.php');
+           $_SESSION['pseudo'] = $pseudo;
+           header('Location: ../public/index.php?route=user_log.php');
         }
         else
         {
@@ -27,10 +27,6 @@ if(isset($_POST['mail']) && isset($_POST['password']))
        header('Location: login.php?erreur=2'); // addresse e-mail ou mot de passe vide
     }
 }
-else
-{
+else{
    header('Location: login.php');
-}
-mysqli_close($db); // fermer la connexion
-?>
 }

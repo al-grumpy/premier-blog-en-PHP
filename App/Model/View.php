@@ -9,9 +9,9 @@ class View
     
     public function render($template, $data = [])
     {
-        $this->file = '../public/templates/'.$template.'.twig';
+        $this->file = '../public/templates/'.$template.'.php';
         $content = $this->renderFile($this->file, $data);
-        $view = $this->renderFile('../public/templates/base.twig', [
+        $view = $this->renderFile('../public/templates/base.php', [
             'title' => $this->title,
             'content' => $content
         ]);

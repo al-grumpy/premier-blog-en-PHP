@@ -1,40 +1,33 @@
-{% extends 'base.twig' %}
+<?php
+$this->title = "Article";
+?>
 
 <h1>Blog en PHP</h1>
 <p>En construction</p>
-
-{% block content %}
-    <h1>Article :{{ article.id}}/{{ article.title}}</h1>
-    <div class="container">
-        <div class="post-preview">
-            {% for article in articles %}
-                <h1>{{ article.title }}</h1>
-                <p>{{ article.chapo }}</p>
-                <p>{{ article.author }}</p>
-                <p>{{ article.date_added }}</p>
-                <hr>
-
-            {% endfor %}
-        </div>
-    </div>
-    <hr>
-    <h1>Commentaires sur l'article :{{ loop.index}}{{ article.title}}</h1>
-    <div class="container">
-        <div class="post-preview">
-            {% for comment in comments %}
-                <h1>{{ comment.pseudo }}</h1>
-                <p>{{ comment.content }}</p>
-                <p>posté le :{{ comment.date_added }}</p>
-                <hr>
-
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
+<div>
+    <h2><?= htmlspecialchars($article->getTitle());?></h2>
+    <p><?= htmlspecialchars($article->getContent());?></p>
+    <p><?= htmlspecialchars($article->getAuthor());?></p>
+    <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+</div>
 <br>
 <a href="../public/index.php">Retour à la liste des articles</a>
 <div id="comments" class="text-left" style="margin-left: 50px">
-    <h4>Ajouter un commentaire :</h4>
+    <h3>Commentaires :</h3>
+    <?php
+    foreach ($comments as $comment)
+    {
+    ?>
+    <hr>
+        <h4><?= htmlspecialchars($comment->getPseudo());?></h4>
+        <p><?= htmlspecialchars($comment->getContent());?></p>
+        <p>Posté le <?= htmlspecialchars($comment->getDateAdded());?></p>
+        <?php
+    }
+    ?>
+    <hr>
+</div>
+<h4>Ajouter un commentaire :</h4>
     <div>
         <form method="post" action="../public/index.php?route=addComment"> 
             <label type="pseudo">Pseudo</label><br>
@@ -52,4 +45,3 @@
             <input type="submit" value="Envoyer" id="submit" name="submit">
         </form>
     </div>
-</div>

@@ -1,7 +1,9 @@
 <?php
+$this->title = "Admin";
+?>
+<?php
 session_start();
 ?>
-
 <div>
     <h1>Blog en PHP</h1>
     <p>En construction / Partie Admin</p>

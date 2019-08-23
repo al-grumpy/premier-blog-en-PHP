@@ -42,8 +42,4 @@ class BackController
             'post' => $post
         ]);
     }
-    public function login()
-    {
-        
-    }
 }

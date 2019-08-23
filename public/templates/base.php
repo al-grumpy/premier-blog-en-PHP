@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  {% block head %} {% endblock %}
+  <?= $title ?>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,8 +56,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div id="content">
-           {% block content %} 
-           {% endblock %}
+        <?= $content ?>
         </div>
       </div>
     </div>
