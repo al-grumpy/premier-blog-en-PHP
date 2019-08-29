@@ -4,11 +4,15 @@ $this->title = "Article";
 
 <h1>Blog en PHP</h1>
 <p>En construction</p>
-<div>
-    <h2><?= htmlspecialchars($article->getTitle());?></h2>
-    <p><?= htmlspecialchars($article->getContent());?></p>
-    <p><?= htmlspecialchars($article->getAuthor());?></p>
-    <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+<div class="contain">
+    <div class="row">
+       <div class="col-xs-6">
+           <h2 style="color:#2C2C45"><?= htmlspecialchars($article->getTitle());?></h2>
+           <p><?= htmlspecialchars($article->getContent());?></p>
+           <p><?= htmlspecialchars($article->getAuthor());?></p>
+           <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+       </div>
+    </div>
 </div>
 <br>
 <a href="../public/index.php">Retour à la liste des articles</a>

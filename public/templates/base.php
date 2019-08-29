@@ -27,13 +27,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <div style="background-color:grey">
-            <nav>
-              <ul>
-                  <a href="#">Home</a>
-                  <a href="#">espace membre</a>
-                  <a href="#">Contact</a>
-              </ul>
-            </nav>
+
             <h1>--Blog en PHP--</h1>
             <h2>Alexia Seurot</h2>
             </div>

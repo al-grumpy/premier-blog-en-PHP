@@ -16,7 +16,7 @@ $this->title = "Ajouter un article";
                 echo $post['chapo'];}
         ?>">
         </textarea><br>
-        <label for="content">Contennu</label><br>
+        <label for="content">Contenu</label><br>
         <textarea id="content" name="content" value="><?php 
             if(isset($post['content'])){
                 echo $post['contenu'];}

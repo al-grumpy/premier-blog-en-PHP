@@ -37,6 +37,7 @@ abstract class DAO
         }
     }
     
+    //Préparation requete sql
     protected function sql($sql, $parameters = null)
     {
         if($parameters)

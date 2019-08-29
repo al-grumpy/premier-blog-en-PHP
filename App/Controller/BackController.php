@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DAO\ArticleDAO;
 use App\DAO\CommentDAO;
+use App\DAO\UserDAO;
 use App\Model\View;
 
 class BackController
@@ -42,4 +43,42 @@ class BackController
             'post' => $post
         ]);
     }
+
+    public function inscription($post)
+    {
+        if(isset($post['submit'])) {
+            $userDAO = new UserDAO();
+            $userDAO->inscription($post); 
+            session_start();
+            $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos articles.';
+            header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
+        }
+        $this->view->render('inscription', [
+            'post' => $post
+        ]);
+    }
+
+    public function login($post)
+    {
+        if(isset($post['submit'])){
+            $isPassCorrect = password_verify($_POST['pass'], $result['pass']);
+
+            if(!$result) {
+                echo 'Mauvais identifiant ou mot de passe incorrect';
+            }
+            else{
+                if($isPassCorrect){
+                    session_start();
+                    $_SESSION['id'] = $resultat['id'];
+                    $_SESSION['pseudo'] = $resultat['pseudo'];
+                    echo 'Vous êtes bien connecté !';
+                }
+                else{
+                    echo 'Mauvais identifiant ou mot de passe incorrect';
+                }
+            }
+        }
+            
+    }
+
 }

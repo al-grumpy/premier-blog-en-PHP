@@ -8,7 +8,9 @@ class User
         
     private $pseudo;
     
-    private $password;
+    private $pass;
+
+    private $mail;
 
     /**
     * @return mixed
@@ -45,17 +47,33 @@ class User
     /**
     * @return mixed
     */
-    private function getPassword()
+    private function getPass()
     {
-        return $this->password;
+        return $this->pass;
     }
     
     /**
-    * @param mixed $password
+    * @param mixed $pass
     */
-    private function setPassword($password)
+    private function setPass($pass)
     {
-        $this->password = $password;
+        $this->pass = $pass;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param mixed $mail
+     */
+    private function setMail($mail)
+    {
+        $this->mail = $mail;
     }
 }
 

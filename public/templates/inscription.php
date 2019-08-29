@@ -2,21 +2,40 @@
 $this->title = "Inscription";
 ?>
 <div>
-   <form action="" method="post">
-        <h1>Inscription</h1>
-        
-        <label>Adresse e-mail</label>
-        <input type="mail" name="mail" required>
+<h1>Inscription à l'espace membre :</h1><br/>
 
-        <label>Pseudo</label>
-        <input type="text" name="text" required>
-        
-        <label>Mot de passe</label>
-        <input type="password" name="password" required>
+<?php if(!empty($errors)): ?>
+<div>
+   <p>Vous n'avez pas rempli le formulaire correctement</p>
+   <?php foreach($errors as $error): ?>
+      <li><?= $error; ?></li>
+   <?php endforeach; ?>
+</div>
+<?php endif; ?>
 
-        <label>Confirmation du mot de passe</label>
-        <input type="password" name="password" required>
-        
-        <input type="submit" id='submit' value='INSCRIPTION' >
+<form method="post" action="../public/index.php?route=inscription">
+        <label type="pseudo">Pseudo</label><br>
+        <input type="text" id="pseudo" name="pseudo" value="<?php
+            if(isset($post['pseudo'])){  //Penser à mettre des contraintes dans input form
+                echo $post['pseudo'];}
+        ?>"><br>
+        <label for="pass">Mot de passe</label><br>
+        <input type="password" id="pass" name="pass" value="<?php
+            if(isset($post['pass'])){  //Penser à mettre des contraintes dans input form
+                echo $post['pass'];}
+        ?>"><br>
+        <label for="pass_confirm">Confirmation du mot de passe</label><br>
+        <input type="password" id="pass_confirm" name="pass_confirm" value="<?php
+            if(isset($post['pass_confirm'])){  //Penser à mettre des contraintes dans input form
+                echo $post['pass_confirm'];}
+        ?>"><br>
+        <label for="mail">Adresse mail</label>
+        <input type="email" id="mail" name="mail" value="<?php
+            if(isset($post['mail'])){
+                echo $post['mail'];} 
+        ?>"><br>
+        <input type="hidden" name="droit" id="droit" value="user">
+        <input type="submit" value="S'inscrire" id="submit" name="submit">
     </form>
+    <a href="../public/index.php">Retour à l'accueil</a>
 </div>

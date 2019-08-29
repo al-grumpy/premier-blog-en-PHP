@@ -10,34 +10,27 @@ if(isset($_SESSION['add_article'])) {
     echo '<p>'.$_SESSION['add_article'].'<p>';
     unset($_SESSION['add_article']);
 }
-?>
-<form action="../public/index.php?route=login" method="POST">
-<h3>Entrez vos informations de connexion</h3>
-
-<label>Pseudo</label>
-<input type="text" placeholder="Entrez votre pseudo" name="pseudo" required>
-
-<label>Mot de passe</label>
-<input type="password" placeholder="Entrez votre mot de passe" name="password" required>
-
-<input type="submit" id="submit" value="LOGIN">
-<?php
-if(isset($_GET['error'])){
-    $err = $_GET['error'];
-    if($err==1 || $err==2)
-    echo "<p style='color:red'>Utilisateur ou mot de passe non valide</p>";
+if(isset($_SESSION['inscription'])) {
+    echo '<p>'.$_SESSION['inscription'].'<p>';
+    unset($_SESSION['inscription']);
 }
-?> 
+?>
+<button type="button"><a href="../public/templates/login.php">Se connecter</button>
+
+<h2><a href="../public/index.php?route=inscription">Se créer un compte utilisateur</a></h2>
+
 <?php
 foreach ($articles as $article)
 {
 ?>
+<hr>
     <article>
         <h2><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>"><?= htmlspecialchars($article->getTitle());?></a></h2>
         <p><?= htmlspecialchars($article->getChapo());?></p>
         <p><?= htmlspecialchars($article->getAuthor());?></p>
         <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
     </article>
+<hr>
 <br>
 <?php
 }

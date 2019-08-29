@@ -23,7 +23,6 @@ class CommentDAO extends DAO
     {
         if(!empty($_POST))
         {
-            var_dump($comment);
             //Permet de recuperer les variables
             extract($comment);
             $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added) VALUES (?, ?, ?, NOW())';
