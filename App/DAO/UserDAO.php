@@ -1,9 +1,6 @@
 <?php
-
 namespace App\DAO;
-
 use App\Model\User;
-
 class UserDAO extends DAO
 {
     public function login($user)
@@ -13,14 +10,11 @@ class UserDAO extends DAO
         $sql = ('SELECT id, pass FROM user WHERE pseudo = :pseudo');
         $result = $this->fetch();
     }
-
     public function inscription($user)
     {
         
         if(isset($post['submit'])) {
-
             $errors = array();
-
             if(empty($_POST['pseudo']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['pseudo'])){
                 $errors['pseudo'] = "Votre pseudo est vide ou  non valide";
             } else {
@@ -40,9 +34,9 @@ class UserDAO extends DAO
         }
         if(empty($errors)){
             //Hache le mot de passe User
-            $pass_hash = password_hash($_POST['pass'], PASSWORD_DEFAULT); //DEFAULT ou BCRYPT ????
+            $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); //DEFAULT ou BCRYPT ????
             if(!empty($_POST)){
-            //Permet de recuperer les variables de formInscription
+            //Permet de recuperer les variables du formulaire Inscription
             extract($user);
             $sql = 'INSERT INTO user (pseudo, mail, droit, pass, date_inscription) VALUES (?, ?, ?, ?, NOW())';
             $this->sql($sql, [$pseudo, $mail, $droit, $pass_hash]); //droit => mettre automatiquement user ...
@@ -50,7 +44,6 @@ class UserDAO extends DAO
         }
     }
     
-
     private function buildObject(array $row)
     {
         $user = new User();
@@ -60,5 +53,4 @@ class UserDAO extends DAO
         
         return $user;
     }
-
 }

@@ -29,7 +29,7 @@ $this->title = "Inscription";
             if(isset($post['pass_confirm'])){  //Penser à mettre des contraintes dans input form
                 echo $post['pass_confirm'];}
         ?>"><br>
-        <label for="mail">Adresse mail</label>
+        <label for="mail">Adresse mail</label><br>
         <input type="email" id="mail" name="mail" value="<?php
             if(isset($post['mail'])){
                 echo $post['mail'];} 

@@ -11,12 +11,14 @@ class Router
 {
     private $frontController;
     private $backController;
+    private $userController;
     private $errorController;
     
     public function __construct()
     {
         $this->frontController = new FrontController();
         $this->backController = new BackController();
+        $this->userController = new UserController();
         $this->errorController = new ErrorController();
     }
     
@@ -35,10 +37,10 @@ class Router
                     $this->backController->addComment($_POST);
                 }
                 else if($_GET['route'] ==='inscription') {
-                    $this->backController->inscription($_POST);
+                    $this->userController->inscription($_POST);
                 }
                 else if($_GET['route'] ==='login') {
-                    $this->backController->login($_POST);
+                    $this->userController->login($_POST);
                 }
                 else{
                     $this->errorController->unknown();

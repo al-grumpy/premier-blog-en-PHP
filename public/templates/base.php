@@ -34,7 +34,7 @@
 
             <div>
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <article><h4>Les derniers articles publiés :</h4></article>
+                    <article><h4>Bienvenue sur ce Blog</h4></article>
                 </div>
             </div>
 

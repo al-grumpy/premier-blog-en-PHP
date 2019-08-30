@@ -18,4 +18,4 @@ session_start();
         ?>"><br>
         <input type="submit" value="Se connecter" id="submit" name="submit">
 </form>
-<a href="../public/index.php">Retour à l'accueil</a>
+<a href="../index.php">Retour à l'accueil</a>
