@@ -6,12 +6,16 @@ use App\Controller\BackController;
 use App\Controller\ErrorController;
 use App\Controller\FrontController;
 use App\Controller\UserController;
+use App\Controller\PostController;
+use App\Controller\CommentController;
 
 class Router
 {
     private $frontController;
     private $backController;
     private $userController;
+    private $postController;
+    private $commentController;
     private $errorController;
     
     public function __construct()
@@ -19,6 +23,8 @@ class Router
         $this->frontController = new FrontController();
         $this->backController = new BackController();
         $this->userController = new UserController();
+        $this->postController = new PostController();
+        $this->commentController = new CommentController();
         $this->errorController = new ErrorController();
     }
     
@@ -28,16 +34,16 @@ class Router
             if(isset($_GET['route']))
             {
                 if($_GET['route'] ==='article'){
-                    $this->frontController->article($_GET['idArt']);
+                    $this->postController->article($_GET['idArt']);
                 }
                 else if($_GET['route'] === 'addArticle') {
-                    $this->backController->addArticle($_POST);
+                    $this->postController->addArticle($_POST);
                 }
                 else if($_GET['route'] ==='addComment') {
-                    $this->backController->addComment($_POST);
+                    $this->commentController->addComment($_POST);
                 }
                 else if($_GET['route'] ==='inscription') {
-                    $this->userController->inscription($_POST);
+                    $this->userController->inscription();
                 }
                 else if($_GET['route'] ==='login') {
                     $this->userController->login($_POST);

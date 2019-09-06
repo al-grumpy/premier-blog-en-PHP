@@ -7,9 +7,11 @@ $this->title = "Inscription";
 <?php if(!empty($errors)): ?>
 <div>
    <p>Vous n'avez pas rempli le formulaire correctement</p>
-   <?php foreach($errors as $error): ?>
-      <li><?= $error; ?></li>
-   <?php endforeach; ?>
+   <ul>
+       <?php foreach($errors as $error): ?>
+           <li><?= $error; ?></li>
+       <?php endforeach; ?>
+   </ul>
 </div>
 <?php endif; ?>
 

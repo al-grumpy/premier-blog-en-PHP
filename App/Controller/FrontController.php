@@ -26,14 +26,4 @@ class FrontController
             'articles' => $articles
         ]);
     }
-    
-    public function article($id)
-    {
-        $article = $this->articleDAO->getArticle($id);
-        $comments = $this->commentDAO->getCommentsFromArticle($id);
-        $this->view->render('single', [
-            'article' => $article,
-            'comments' => $comments
-        ]);
-    }
 }

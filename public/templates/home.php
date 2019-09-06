@@ -1,8 +1,10 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <?php
-$this->title = "Acceuil";
+$this->title = "Accueil";
 ?>
 <?php
 //SESSION AJOUT Article (a basculer dans systeme admin)

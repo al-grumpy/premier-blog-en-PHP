@@ -12,6 +12,11 @@ class User
 
     private $mail;
 
+    public function __construct()
+    {
+        $this->droit = 'user';
+    }
+
     /**
     * @return mixed
     */

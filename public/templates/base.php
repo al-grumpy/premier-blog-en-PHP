@@ -37,7 +37,6 @@
                     <article><h4>Bienvenue sur ce Blog</h4></article>
                 </div>
             </div>
-
           </div>
         </div>
       </div>
