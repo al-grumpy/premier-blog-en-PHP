@@ -9,6 +9,9 @@
   <meta name="author" content="">
 
   <?= $title ?>
+  <button type="button"><a href="../public/templates/login.php">Se connecter</button></a>
+<button type="button"><a href="../public/index.php?route=inscription">S'inscrire</button></a>
+<button type="button"><a href="../public/index.php?route=contact">Contact</button></a>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,21 +24,23 @@
 <body>
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('../public/img/bg2.jpg')">
-    <div class="overlay"></div>
+    <div class="overlay"><img src="../public/img/logo.png"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <div style="background-color:grey">
 
-            <h1>--Blog en PHP--</h1>
             <h2>Alexia Seurot</h2>
             </div>
-
-            <div>
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <article><h4>Bienvenue sur ce Blog</h4></article>
+            <div class="container">
+                <div class="">
+                        <div class="col-lg-5 col-md-5">
+                        <span>Développeuse web</span>
+                        </div>
                 </div>
+            </div>
+            
             </div>
           </div>
         </div>
@@ -58,37 +63,11 @@
   <hr>
 
   <!-- Footer -->
-  <footer>
+  <footer style="background-color:#3A3A3F">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <p class="copyright text-muted">Copyright &copy; blogPHP Alexia_Seurot 2019</p>
+          <p class="copyright text-muted" style="color:white">Copyright &copy; blogPHP Alexia_Seurot 2019</p>
         </div>
       </div>
     </div>

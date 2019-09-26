@@ -8,15 +8,14 @@ class User
         
     private $pseudo;
     
-    private $pass;
-
     private $mail;
-
-    public function __construct()
-    {
-        $this->droit = 'user';
-    }
-
+    
+    private $droit;
+    
+    private $pass;
+    
+    private $date_inscription;
+    
     /**
     * @return mixed
     */
@@ -52,7 +51,39 @@ class User
     /**
     * @return mixed
     */
-    private function getPass()
+    public function getMail()
+    {
+        return $this->mail;
+    }
+    
+    /**
+    * @param mixed $mail
+    */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+    
+    /**
+    * @return mixed
+    */
+    public function getDroit()
+    {
+        return $this->droit;
+    }
+    
+    /**
+    * @param mixed $droit
+    */
+    public function setDroit($droit)
+    {
+        $this->droit = $droit;
+    }
+    
+    /**
+    * @return mixed
+    */
+    public function getPass()
     {
         return $this->pass;
     }
@@ -60,25 +91,24 @@ class User
     /**
     * @param mixed $pass
     */
-    private function setPass($pass)
+    public function setPass($pass)
     {
         $this->pass = $pass;
     }
-
+    
     /**
-     * @return mixed
-     */
-    private function getMail()
+    * @return mixed
+    */
+    public function getDateInscription()
     {
-        return $this->mail;
+        return $this->date_inscription;
     }
-
+    
     /**
-     * @param mixed $mail
-     */
-    private function setMail($mail)
+    * @param mixed $date_inscription
+    */
+    public function setDateInscription($date_inscription)
     {
-        $this->mail = $mail;
+        $this->date_inscription = $date_inscription;
     }
 }
-

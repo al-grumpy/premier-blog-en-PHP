@@ -3,6 +3,12 @@ $this->title = "Admin";
 ?>
 <?php
 session_start();
+
+//SESSION AJOUT Article (a basculer dans systeme admin)
+if(isset($_SESSION['add_article'])) {
+    echo '<p>'.$_SESSION['add_article'].'<p>';
+    unset($_SESSION['add_article']);
+}
 ?>
 <div>
     <h1>Blog en PHP</h1>

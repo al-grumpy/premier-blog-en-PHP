@@ -19,7 +19,15 @@ class PostController
         $this->view = new View();
     }
 
-    public function addArticle($post) //A basculer dans ArticleController avec condition de connexion
+    public function allArticles()
+    {
+        $articles = $this->articleDAO->allArticles();
+        $this->view->render('all_articles', [
+            'articles' => $articles
+        ]);
+    }
+
+    public function addArticle($post) 
     {
         if(isset($post['submit'])) {
             $articleDAO = new ArticleDAO();

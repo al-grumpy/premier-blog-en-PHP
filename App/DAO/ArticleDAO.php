@@ -8,7 +8,7 @@ class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC';
+        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC LIMIT 3';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -19,6 +19,19 @@ class ArticleDAO extends DAO
         return $articles;
     }
     
+    public function allArticles()
+    {
+        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC';
+        $result = $this->sql($sql);
+        $articles = [];
+        foreach ($result as $row) {
+            $articleId = $row['id'];
+            $articles[$articleId] = $this->buildObject($row);
+        }
+        
+        return $articles;
+    }
+
     public function getArticle($idArt)
     {
         $sql = 'SELECT id, title, chapo, content, author, date_added FROM article WHERE id = ?';

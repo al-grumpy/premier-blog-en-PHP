@@ -36,6 +36,18 @@ class Router
                 if($_GET['route'] ==='article'){
                     $this->postController->article($_GET['idArt']);
                 }
+                else if($_GET['route'] === 'allArticles') {
+                    $this->postController->allArticles();
+                }
+                else if($_GET['route'] === 'allUsers') {
+                    $this->userController->allUsers();
+                }
+                else if($_GET['route'] === 'user') {
+                    $this->userController->user($_GET['idUser']);
+                }
+                else if($_GET['route'] === 'deleteUser') {
+                    $this->userController->deleteUser($_POST);
+                }
                 else if($_GET['route'] === 'addArticle') {
                     $this->postController->addArticle($_POST);
                 }
@@ -46,7 +58,7 @@ class Router
                     $this->userController->inscription();
                 }
                 else if($_GET['route'] ==='login') {
-                    $this->userController->login($_POST);
+                    $this->userController->login();
                 }
                 else{
                     $this->errorController->unknown();

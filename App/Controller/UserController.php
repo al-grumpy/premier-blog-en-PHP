@@ -11,6 +11,7 @@ class UserController
     
     public function __construct()
     {
+        $this->userDAO = new userDAO();
         $this->view = new View();
     }
 
@@ -37,7 +38,7 @@ class UserController
 
         $userDAO = new UserDAO();
         if ($userDAO->isUsernameExist($_POST['pseudo'])) {
-            $errors['pseudo'] = 'Ce pseudo est déjà pris';
+            $errors['pseudo'] = 'Ce pseudo n\'est pas disponible.';
         }
 
         if (empty($errors)) {
@@ -50,28 +51,57 @@ class UserController
     }
 
 
-    public function login($post)
+    public function login()
     {
-        if(isset($post['submit'])){
-            $passHashed = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-            $isPassCorrect = password_verify($_POST['pass'], $passHashed);
-            if(!$isPassCorrect) {
-                echo 'Mauvais identifiant ou mot de passe incorrect';
-            }
-            else{
-                if($isPassCorrect){
-                    session_start();
-                    $_SESSION['id'] = $user['id'];
-                    $_SESSION['pseudo'] = $user['pseudo'];
-                    echo 'Vous êtes bien connecté !';
-                   // header('Location: ../index.php?route=userConnect');
-                }
-                else{
-                    echo 'Mauvais identifiant ou mot de passe incorrect';
-                }
-            }
-        }
+        if (isset($_POST['submit_login'])) {
             
+            if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
+
+                $userDAO = new UserDAO();
+                if ($userDAO->isUsernameExist($_POST['pseudo'])) { 
+
+                    $postName = htmlspecialchars($_POST['pseudo']);
+                    $postPass = htmlspecialchars($_POST['pass']);
+                    $userPass = $userDAO->getUserByName($postName);
+                    var_dump($userPass['pass']);
+                    var_dump($postPass);
+                    
+
+                    if (!password_verify($postPass, $userPass['pass'])) {
+                        var_dump($postPass);
+                        session_start();
+                        $_SESSION['login'] = 'Vous êtes bien connecté, vous pouvez déposer vos articles!';
+                        header('Location: ../public/index.php?route=userConnect'); //Doit renvoyer sur formConnexion
+                    }
+                    
+                    return 'Identifiant ou mot de passe incorrect';
+                }
+
+                return 'Identifiant ou mot de passe incorrect'; 
+            }
+            else {
+                $error = "Erreur";
+            }
+        }      
+        
+    }
+
+    public function allUsers()
+    {
+        $users = $this->userDAO->getUsers();
+        $this->view->render('all_users', [
+            'users' => $users
+        ]);
+    }
+
+    public function user($id)
+    {
+        $user = $this->userDAO->getUser($id);
+        
+        $this->view->render('profil', [
+            'user' => $user,
+        
+        ]);
     }
 
     public function getUser()
@@ -82,10 +112,25 @@ class UserController
     public function deleteUser()
     {
         //Accessible par Admin pour supprimer un user ou par user pour supprimer son propre compte
+        if (isset($_POST['submit_delete'])) {
+
+            $userDAO = new UserDAO();
+            if ($userDAO->isUsernameExist($_POST['pseudo'])) {
+
+                $userName = $userDAO->deleteUser($_POST['pseudo']);
+                session_start();
+                $_SESSION['delete_user'] = 'L\'utilisateur à bien été supprimé !';
+                header('Location: ../public/index.php?route=allUser');
+            }
+            $this->view->render('delete_user', [
+                'post' => $post
+            ]);           
+        }
     }
 
     public function forgetPass()
     {
         //Accessible par tous Admin et User en cas de Mdp oublié
+
     }
 }

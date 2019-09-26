@@ -6,14 +6,6 @@ use App\Model\User;
 
 class UserDAO extends DAO
 {
-    public function login($user)
-    {
-        //Permet de recuperer les variables $title, $content et $author
-        extract($user);
-        $sql = ('SELECT id, pass FROM user WHERE pseudo = :pseudo');
-        $result = $this->fetch();
-    }
-
     public function isUsernameExist(string $username): bool
     {
         $sql = ('SELECT id FROM user WHERE pseudo = ?');
@@ -26,6 +18,15 @@ class UserDAO extends DAO
         return false;
     }
 
+    public function getUserByName(string $userName)
+    {
+        $sql = ('SELECT * FROM user WHERE pseudo = ?');
+        $result = $this->sql($sql, [$userName]);
+        
+        return $result->fetch();
+    }
+
+
     public function inscription(array $user)
     {
         extract($user);
@@ -34,14 +35,51 @@ class UserDAO extends DAO
         $this->sql($sql, [$pseudo, $mail, 'user', $passHashed]);
     }
 
-    public function getUser()
+    public function getUsers()
     {
-        //Accessible par Admin pour voir tous ou une partie des user
+        $sql = 'SELECT id, pseudo, mail, droit, date_inscription FROM user ORDER BY id DESC';
+        $result = $this->sql($sql);
+        $users = [];
+        foreach ($result as $row) {
+            $userId = $row['id'];
+            $userName = $row['pseudo'];
+            $userMail = $row['mail'];
+            $userDroit = $row['droit'];
+            $userDate = $row['date_inscription'];
+            $users[$userId] = $this->buildObject($row);
+        }
+        
+        return $users;
     }
 
-    public function deleteUser()
+    public function getUser($idUser)
+    {
+        $sql = 'SELECT id, pseudo, mail, droit, date_inscription FROM user WHERE id = ?';
+        $result = $this->sql($sql, [$idUser]);
+        $row = $result->fetch();
+        if($row) {
+            return $this->buildObject($row);
+        } else {
+            echo 'Aucun utilisateur existant avec cet identifiant';
+        }
+    }
+
+    public function showUser($user)
+    {
+        //Accessible par Admin pour voir tous ou une partie des user
+        $sql = 'SELECT * FROM user WHERE pseudo = ?';
+        $result = $this->sql($sql[$user]);
+        
+        return $result->fetch();
+    }
+
+    public function deleteUser(string $userName)
     {
         //Accessible par Admin pour supprimer un user ou par user pour supprimer son propre compte
+        $sql = 'DELETE FROM user WHERE pseudo = ?';
+        $result = $this->sql($sql[$userName]);
+
+        return $result;
     }
 
     public function forgetPass()
@@ -56,6 +94,7 @@ class UserDAO extends DAO
         $user->setPseudo($row['pseudo']);
         $user->setDroit($row['droit']);
         $user->setMail($row['mail']);
+        $user->setDateInscription($row['date_inscription']);
         
         return $user;
     }

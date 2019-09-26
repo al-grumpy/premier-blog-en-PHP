@@ -21,7 +21,7 @@ class CommentController
             $commentDAO = new CommentDAO();
             $commentDAO->addComment($post);
             session_start();
-            $_SESSION['add_comment'] = 'votre commentaire à bien été posté !';
+            $_SESSION['add_comment'] = 'Votre commentaire à bien été envoyé, il sera déposé après validation par un admin. <br>Merci pour votre patience!';
             header('Location: ../public/index.php?route=article&idArt='.$post['article_id']);
         }
         $this->view->render('add_comment', [

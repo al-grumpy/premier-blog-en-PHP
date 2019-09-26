@@ -8,7 +8,7 @@ class CommentDAO extends DAO
 {
     public function getCommentsFromArticle($idArt)
     {
-        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ?';
+        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ? AND confirmed = 1';
         $result = $this->sql($sql, [$idArt]);
         $comments = [];
         foreach ($result as $row) {
@@ -25,7 +25,7 @@ class CommentDAO extends DAO
         {
             //Permet de recuperer les variables
             extract($comment);
-            $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added) VALUES (?, ?, ?, NOW())';
+            $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added, confirmed) VALUES (?, ?, ?, NOW(), 0)';
             $this->sql($sql, [$article_id, $pseudo, $content]); 
         }
         

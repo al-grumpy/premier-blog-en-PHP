@@ -4,7 +4,7 @@ if(session_status() == PHP_SESSION_NONE) {
 }
 ?>
 <?php
-$this->title = "Accueil";
+$this->title = "Tous les articles";
 ?>
 <?php
 
@@ -19,7 +19,7 @@ if(isset($_SESSION['login'])) {
 ?>
 
 <div class="container">
-<h2>Les derniers articles :</h2>
+<h2>Tous les articles :</h2>
 <?php
 foreach ($articles as $article)
 {
@@ -40,5 +40,4 @@ foreach ($articles as $article)
 ?>
 </div>
 
-<a href="../public/index.php?route=allArticles">Tous les articles</a>
-<a href="../public/index.php?route=allUsers">Tous les membres</a>
+<a href="../public/index.php">Retour accueil</a>

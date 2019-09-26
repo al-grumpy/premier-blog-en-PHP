@@ -4,11 +4,12 @@ CREATE TABLE `user` (
     `droit` varchar(255) NOT NULL,
     `pass` varchar(40) NOT NULL,
     `email` varchar(255) NOT NULL,
-    `date_inscription` date
+    `date_inscription` date,
+    `new_pass` int(1) DEFAULT 0;
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `user`
 ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;

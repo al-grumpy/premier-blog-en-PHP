@@ -1,21 +1,32 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<?php
 $this->title = "Article";
 ?>
+<?php
+if(isset($_SESSION['add_comment'])) {
+    echo '<p>'.$_SESSION['add_comment'].'<p>';
+    unset($_SESSION['add_comment']);
+}
+?>
 
-<h1>Blog en PHP</h1>
-<p>En construction</p>
 <div class="contain">
     <div class="row">
-       <div class="col-xs-6">
+    <hr>
+       <div class="col-xs-6" style="text-align:center">
            <h2 style="color:#2C2C45"><?= htmlspecialchars($article->getTitle());?></h2>
            <p><?= htmlspecialchars($article->getContent());?></p>
            <p><?= htmlspecialchars($article->getAuthor());?></p>
            <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
        </div>
+    <hr>
     </div>
 </div>
 <br>
-<a href="../public/index.php">Retour à la liste des articles</a>
+<a href="../public/index.php">Retour à l'accueil</a>
 <div id="comments" class="text-left" style="margin-left: 50px">
     <h3>Commentaires :</h3>
     <?php
