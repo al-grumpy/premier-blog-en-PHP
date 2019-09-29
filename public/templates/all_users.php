@@ -8,12 +8,17 @@ $this->title = "Tous les membres";
 ?>
 <?php
 
-if(isset($_SESSION['login'])) {
-    echo '<p>'.$_SESSION['login'].'<p>';
-    unset($_SESSION['login']);
+if(isset($_SESSION['login']) && $_SESSION['droit'] === 'admin') { 
+    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=addArticle">Déposer un article</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    
+}
+else{
+    header('Location: ../public/index.php');
 }
 ?>
-
 <div class="container">
 <h2>Tous les membres :</h2>
 <?php

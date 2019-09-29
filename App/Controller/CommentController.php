@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DAO\CommentDAO;
 use App\DAO\ArticleDAO;
 use App\Model\View;
+use App\Model\UserDAO;
 
 class CommentController
 {
@@ -17,7 +18,15 @@ class CommentController
 
     public function addComment($post) //A basculer dans CommentController avec condition de connexion
     {
-        if(isset($post['submit'])) {
+        
+
+        if(isset($post['submit_comment']) && !isset($_SESSION['pseudo']) ) {
+            session_start();
+            $_SESSION['flash'] = 'Connectez-vous ou inscrivez-vous afin de pouvoir déposer des commentaires !';
+            header('Location: ../public/index.php?route=article&idArt='.$post['article_id']);
+        }
+
+        if(isset($post['submit_comment']) && isset($_SESSION['login'])) {
             $commentDAO = new CommentDAO();
             $commentDAO->addComment($post);
             session_start();
@@ -29,8 +38,4 @@ class CommentController
         ]);
     }
 
-    public function deleteComment()
-    {
-        //fonction supression de commentaire par son autheur ou par Admin
-    }
 }

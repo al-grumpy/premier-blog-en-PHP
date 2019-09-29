@@ -6,6 +6,7 @@ use App\Model\Comment;
 
 class CommentDAO extends DAO
 {
+    //Récupération des commentaires liés à un article
     public function getCommentsFromArticle($idArt)
     {
         $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ? AND confirmed = 1';
@@ -19,18 +20,19 @@ class CommentDAO extends DAO
         return $comments;
     }
     
+    //Fonction pour insérer des commentaires dans la BDD
     public function addComment($comment)
     {
         if(!empty($_POST))
         {
             //Permet de recuperer les variables
             extract($comment);
-            $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added, confirmed) VALUES (?, ?, ?, NOW(), 0)';
+            $sql = 'INSERT INTO comment (article_id, pseudo, content, date_added, confirmed) VALUES (?, ?, ?,  NOW(), 0)';
             $this->sql($sql, [$article_id, $pseudo, $content]); 
+
         }
-        
+
     }
-    
     
     private function buildObject(array $row)
     {

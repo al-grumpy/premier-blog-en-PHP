@@ -3,12 +3,13 @@
 namespace App\DAO;
 
 use App\Model\Article;
+use App\Model\User;
 
 class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC LIMIT 3';
+        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC LIMIT 2';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -50,6 +51,14 @@ class ArticleDAO extends DAO
         extract($article);
         $sql = 'INSERT INTO article (title, chapo, content, author, date_added) VALUES (?, ?, ?, ?, NOW())';
         $this->sql($sql, [$title, $chapo, $content, $author]);
+    }
+
+    public function modifyArticle($idArt)
+    {
+        $sql = 'UPDATE title, chapo, content FROM article WHERE userId = ?';
+        $result = $this->sql($sql, [$idArt]);
+
+        return $result;
     }
 
     private function buildObject(array $row)

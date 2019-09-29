@@ -42,6 +42,9 @@ class Router
                 else if($_GET['route'] === 'allUsers') {
                     $this->userController->allUsers();
                 }
+                else if($_GET['route'] === 'allCommentsWaiting') {
+                    $this->commentController->allCommentsWaiting();
+                }
                 else if($_GET['route'] === 'user') {
                     $this->userController->user($_GET['idUser']);
                 }
@@ -59,6 +62,9 @@ class Router
                 }
                 else if($_GET['route'] ==='login') {
                     $this->userController->login();
+                }
+                else if($_GET['route'] ==='logout') {
+                    $this->userController->logout();
                 }
                 else{
                     $this->errorController->unknown();

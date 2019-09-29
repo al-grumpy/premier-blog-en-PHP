@@ -19,6 +19,7 @@ class UserController
 
     public function inscription()
     {
+        //Vérification des erreurs lors de la saisie 
         if (empty($_POST) || !isset($_POST['submit'])) {
             return $this->view->render('inscription');
         }
@@ -40,49 +41,54 @@ class UserController
         if ($userDAO->isUsernameExist($_POST['pseudo'])) {
             $errors['pseudo'] = 'Ce pseudo n\'est pas disponible.';
         }
-
+        //Si aucune erreur on valide l'inscription en passant par la methode inscription
         if (empty($errors)) {
             $userDAO->inscription($_POST); 
             session_start();
-            $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos articles.';
+            $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos commentaires.';
             header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
         }   
         $this->view->render('inscription');
     }
 
-
+    //Se connecter
     public function login()
     {
-        if (isset($_POST['submit_login'])) {
-            
-            if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
+        //Si les champs du formulaire sont envoyés vide alors retour formulaire connexion
+        if (!isset($_POST['submit_login']) || (empty($_POST['pseudo']) || empty($_POST['pass']))) {
+            return $this->view->render('login');
+        }
+        
+        //Stockage des variables entrées pour la connexion et hash du mot de passe 
+        $userDAO = new UserDAO();
+        $postName = htmlspecialchars($_POST['pseudo']);
+        $postPass = htmlspecialchars($_POST['pass']);
+        $postPass = hash('sha512', $postPass);
 
-                $userDAO = new UserDAO();
-                if ($userDAO->isUsernameExist($_POST['pseudo'])) { 
+        //Vérification des données entrées avec celles stockées dans la BDD avec méthode getUserByNameAndPassword()
+        $user = $userDAO->getUserByNameAndPassword($postName, $postPass);
 
-                    $postName = htmlspecialchars($_POST['pseudo']);
-                    $postPass = htmlspecialchars($_POST['pass']);
-                    $userPass = $userDAO->getUserByName($postName);
-                    var_dump($userPass['pass']);
-                    var_dump($postPass);
-                    
+        //Si données incorrect affichage message erreur
+        if (empty($user)) {
+            return 'Identifiant ou mot de passe incorrect';
+        }
 
-                    if (!password_verify($postPass, $userPass['pass'])) {
-                        var_dump($postPass);
-                        session_start();
-                        $_SESSION['login'] = 'Vous êtes bien connecté, vous pouvez déposer vos articles!';
-                        header('Location: ../public/index.php?route=userConnect'); //Doit renvoyer sur formConnexion
-                    }
-                    
-                    return 'Identifiant ou mot de passe incorrect';
-                }
+        //Lance une session et stock les information de l'utilisateur connecté
+        session_start();
+        $_SESSION['login'] = 'Vous êtes bien connecté, vous pouvez déposer vos commentaires.';
+        $_SESSION['pseudo'] = $user['pseudo'];
+        $_SESSION['droit'] = $user['droit'];
+        $_SESSION['pseudo_id'] = $user['id'];
+        header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
+    }
 
-                return 'Identifiant ou mot de passe incorrect'; 
-            }
-            else {
-                $error = "Erreur";
-            }
-        }      
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        header('Location: ../public/index.php'); 
+        exit();
         
     }
 
@@ -102,35 +108,5 @@ class UserController
             'user' => $user,
         
         ]);
-    }
-
-    public function getUser()
-    {
-        //Accessible par Admin pour voir tous ou une partie des user 
-    }
-
-    public function deleteUser()
-    {
-        //Accessible par Admin pour supprimer un user ou par user pour supprimer son propre compte
-        if (isset($_POST['submit_delete'])) {
-
-            $userDAO = new UserDAO();
-            if ($userDAO->isUsernameExist($_POST['pseudo'])) {
-
-                $userName = $userDAO->deleteUser($_POST['pseudo']);
-                session_start();
-                $_SESSION['delete_user'] = 'L\'utilisateur à bien été supprimé !';
-                header('Location: ../public/index.php?route=allUser');
-            }
-            $this->view->render('delete_user', [
-                'post' => $post
-            ]);           
-        }
-    }
-
-    public function forgetPass()
-    {
-        //Accessible par tous Admin et User en cas de Mdp oublié
-
     }
 }

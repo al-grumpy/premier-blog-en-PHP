@@ -26,6 +26,4 @@ class FrontController
             'articles' => $articles
         ]);
     }
-
-    
 }

@@ -4,18 +4,21 @@ namespace App\Controller;
 
 use App\DAO\ArticleDAO;
 use App\DAO\CommentDAO;
+use App\DAO\UserDAO;
 use App\Model\View;
 
 class PostController
 {
     private $articleDAO;
     private $commentDAO;
+    private $userDAO;
     private $view;
     
     public function __construct()
     {
         $this->articleDAO = new ArticleDAO();
         $this->commentDAO = new CommentDAO();
+        $this->userDAO = new UserDAO();
         $this->view = new View();
     }
 
@@ -49,5 +52,15 @@ class PostController
             'article' => $article,
             'comments' => $comments
         ]);
+    }
+
+    public function modifyArticle($id)
+    {
+        if (isset($post['submit_modif'])) {
+            $article = $this->articleDAO->modifyArticle($id);
+            session_start();
+            $_SESSION['modify_article'] = 'Votre article à été mis à jour';
+            header('Location: ../public/index.php?route');
+        }
     }
 }

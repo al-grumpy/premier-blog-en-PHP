@@ -5,7 +5,6 @@ CREATE TABLE `user` (
     `pass` varchar(40) NOT NULL,
     `email` varchar(255) NOT NULL,
     `date_inscription` date,
-    `new_pass` int(1) DEFAULT 0;
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `user`

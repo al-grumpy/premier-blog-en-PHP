@@ -6,6 +6,7 @@ use App\Model\User;
 
 class UserDAO extends DAO
 {
+    //Vérifie si username est présent dans la BDD
     public function isUsernameExist(string $username): bool
     {
         $sql = ('SELECT id FROM user WHERE pseudo = ?');
@@ -18,11 +19,21 @@ class UserDAO extends DAO
         return false;
     }
 
-    public function getUserByName(string $userName)
+    //Selectionne un utilisateur et stock ses informations
+    public function getUserByName(string $username)
     {
         $sql = ('SELECT * FROM user WHERE pseudo = ?');
-        $result = $this->sql($sql, [$userName]);
+        $result = $this->sql($sql, [$username]);
         
+        return $result->fetch();
+    }
+
+    //Méthode pour vérifier si les informations de connexion sont correct
+    public function getUserByNameAndPassword(string $username, string $password)
+    {
+        $sql = ('SELECT * FROM user WHERE pseudo = ? AND pass = ?');
+        $result = $this->sql($sql, [$username, $password]);
+
         return $result->fetch();
     }
 
@@ -30,7 +41,7 @@ class UserDAO extends DAO
     public function inscription(array $user)
     {
         extract($user);
-        $passHashed = password_hash($pass, PASSWORD_DEFAULT);
+        $passHashed = hash('sha512', $pass);
         $sql = 'INSERT INTO user (pseudo, mail, droit, pass, date_inscription) VALUES (?, ?, ?, ?, NOW())';
         $this->sql($sql, [$pseudo, $mail, 'user', $passHashed]);
     }
@@ -62,29 +73,6 @@ class UserDAO extends DAO
         } else {
             echo 'Aucun utilisateur existant avec cet identifiant';
         }
-    }
-
-    public function showUser($user)
-    {
-        //Accessible par Admin pour voir tous ou une partie des user
-        $sql = 'SELECT * FROM user WHERE pseudo = ?';
-        $result = $this->sql($sql[$user]);
-        
-        return $result->fetch();
-    }
-
-    public function deleteUser(string $userName)
-    {
-        //Accessible par Admin pour supprimer un user ou par user pour supprimer son propre compte
-        $sql = 'DELETE FROM user WHERE pseudo = ?';
-        $result = $this->sql($sql[$userName]);
-
-        return $result;
-    }
-
-    public function forgetPass()
-    {
-        //Accessible par tous Admin et User en cas de Mdp oublié
     }
     
     private function buildObject(array $row)

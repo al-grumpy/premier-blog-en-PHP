@@ -11,6 +11,23 @@ if(isset($_SESSION['add_comment'])) {
     echo '<p>'.$_SESSION['add_comment'].'<p>';
     unset($_SESSION['add_comment']);
 }
+if(isset($_SESSION['flash']) && !isset($_SESSION['pseudo'])) {
+    echo '<p>'.$_SESSION['flash'].'<p>';
+    unset($_SESSION['flash']);
+}
+if(isset($_SESSION['login']) && $_SESSION['droit'] == 'user') {
+    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
+    echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    echo '<p>'.$_SESSION['login'].'<p>';
+}
+if(!isset($_SESSION['login'])) {
+    echo '<button type="button"><a href="../public/index.php?route=login">Se connecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=inscription">S\'inscrire</button></a>';
+    echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+}
+
 ?>
 
 <div class="contain">
@@ -44,12 +61,10 @@ if(isset($_SESSION['add_comment'])) {
 </div>
 <h4>Ajouter un commentaire :</h4>
     <div>
-        <form method="post" action="../public/index.php?route=addComment"> 
-            <label type="pseudo">Pseudo</label><br>
-            <input type="text" id="pseudo" name="pseudo" required value="<?php
-                if(isset($post['pseudo'])){  //Penser à mettre des contraintes dans input form et verif route addComment...
-                    echo $post['pseudo'];}
-            ?>"><br>
+        <form method="post" action="../public/index.php?route=addComment">
+            <label for="pseudo">Votre pseudo est posté automatiquement</label>
+            <br>
+            <input type="hidden" name="pseudo" id="pseudo" value="<?= htmlspecialchars($_SESSION['pseudo']);?>" >
             <label for="content">Message</label><br>
             <textarea id="content" name="content" row="5" required value="<?php 
                 if(isset($post['content'])){
@@ -57,6 +72,6 @@ if(isset($_SESSION['add_comment'])) {
             ?>">
             </textarea><br>
             <input type="hidden" name="article_id" id="article_id" value="<?= htmlspecialchars($article->getId());?>" >
-            <input type="submit" value="Envoyer" id="submit" name="submit">
+            <input type="submit" value="Envoyer" id="submit_comment" name="submit_comment">
         </form>
     </div>

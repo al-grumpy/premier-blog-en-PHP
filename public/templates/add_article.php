@@ -1,10 +1,29 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<?php
 $this->title = "Ajouter un article";
 ?>
-<h1>Mon blog</h1>
-<p>En construction</p>
-<div>
-    <form method="post" action="../public/index.php?route=addArticle">
+<?php
+
+if(isset($_SESSION['login']) && $_SESSION['droit'] === 'admin') { 
+    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=addArticle">Déposer un article</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    
+}
+else{
+    header('Location: ../public/index.php');
+}
+?>
+<div class="contain">
+    <div class="row">
+    <hr>
+       <div class="col-xs-6" style="text-align:center">
+           <form method="post" action="../public/index.php?route=addArticle">
         <label type="title">Titre</label><br>
         <input type="text" id="title" name="title" value="<?php
             if(isset($post['title'])){  //Penser à mettre des contraintes dans input form
@@ -29,5 +48,11 @@ $this->title = "Ajouter un article";
         ?>"><br>
         <input type="submit" value="Envoyer" id="submit" name="submit">
     </form>
+       </div>
+    <hr>
+    </div>
+</div>
+<div>
+    
     <a href="../public/index.php">Retour à l'accueil</a>
 </div>

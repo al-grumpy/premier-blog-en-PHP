@@ -9,9 +9,7 @@
   <meta name="author" content="">
 
   <?= $title ?>
-  <button type="button"><a href="../public/templates/login.php">Se connecter</button></a>
-<button type="button"><a href="../public/index.php?route=inscription">S'inscrire</button></a>
-<button type="button"><a href="../public/index.php?route=contact">Contact</button></a>
+  
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +22,8 @@
 <body>
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('../public/img/bg2.jpg')">
-    <div class="overlay"><img src="../public/img/logo.png"></div>
+    <div class="overlay"><img src="../public/img/logo.png"><a href="https://www.linkedin.com/in/alexia-seurot-014313125/">
+    <img src="../public/img/linkedin.png" width="100px"></a></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
