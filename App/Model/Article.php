@@ -15,6 +15,8 @@ class Article
     private $author;
     
     private $date_added;
+
+    private $user_id;
     
     /**
     * @return mixed
@@ -94,6 +96,22 @@ class Article
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+    * @return mixed
+    */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+    
+    /**
+    * @param mixed $user_id
+    */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
     }
     
     /**

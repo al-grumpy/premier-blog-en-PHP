@@ -8,11 +8,11 @@ class ErrorController
 {
     public function unknown()
     {
-        require '../templates/unknown.php';
+        require '../public/templates/unknown.php';
     }
     
     public function error()
     {
-        require '../templates/error.php';
+        require '../public/templates/error.php';
     }
 }
