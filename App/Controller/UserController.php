@@ -30,11 +30,11 @@ class UserController
         }
 
         if (empty($_POST['mail']) || !filter_var($_POST['mail'] , FILTER_VALIDATE_EMAIL)){
-            $errors['mail'] = "Votre email est vide ou non valide";
+            $errors['mail'] = 'Votre email est vide ou non valide';
         }
         
         if (empty($_POST['pass']) || $_POST['pass'] !== $_POST['pass_confirm']){
-            $errors['pass'] = "Les mots de passe sont différents";
+            $errors['pass'] = 'Les mots de passe sont différents';
         }
 
         $userDAO = new UserDAO();
@@ -47,7 +47,8 @@ class UserController
             session_start();
             $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos commentaires.';
             header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
-        }   
+        }
+       
         $this->view->render('inscription');
     }
 
@@ -109,4 +110,5 @@ class UserController
         
         ]);
     }
+
 }

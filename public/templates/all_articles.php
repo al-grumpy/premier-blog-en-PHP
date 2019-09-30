@@ -19,7 +19,7 @@ if(isset($_SESSION['login']) && $_SESSION['droit'] == 'admin') {
 if(isset($_SESSION['login']) && $_SESSION['droit'] == 'user') {
     echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
     echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
-    echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';;
+    echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
     echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
     echo '<p>'.$_SESSION['login'].'<p>';
 }

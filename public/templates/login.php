@@ -8,12 +8,12 @@ session_start();
 <form method="post" action="../public/index.php?route=login">
         <label type="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo" value="<?php
-            if(isset($post['pseudo'])){  //Penser à mettre des contraintes dans input form
+            if(isset($post['pseudo'])){  
                 echo $post['pseudo'];}
         ?>"><br>
         <label for="pass">Mot de passe</label><br>
         <input type="password" id="pass" name="pass" value="<?php
-            if(isset($post['pass'])){  //Penser à mettre des contraintes dans input form
+            if(isset($post['pass'])){  
                 echo $post['pass'];}
         ?>"><br>
         <input type="submit" value="Se connecter" id="submit" name="submit_login">
