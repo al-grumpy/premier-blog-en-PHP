@@ -54,13 +54,15 @@ class PostController
         ]);
     }
 
-    public function modifyArticle($id)
+    public function updateArticle($id)
     {
-        if (isset($post['submit_modif'])) {
-            $article = $this->articleDAO->modifyArticle($id);
+        if (isset($post['submit_modif']) && isset($_SESSION['admin'])) {
+            $articleDAO = new ArticleDAO();
+            $articleDAO->updateArticle($id);
             session_start();
-            $_SESSION['modify_article'] = 'Votre article à été mis à jour';
-            header('Location: ../public/index.php?route');
+            $_SESSION['update_article'] = 'Votre article à été mis à jour';
+            header('Location: ../public/index.php?route=article&idArt='.$post['id']);
         }
+        $this->view->render('update_article');
     }
 }

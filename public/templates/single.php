@@ -39,9 +39,11 @@ if(!isset($_SESSION['login'])) {
            <p><?= htmlspecialchars($article->getAuthor());?></p>
            <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
        </div>
+       <a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>">Modifier l'article</a>
     <hr>
     </div>
 </div>
+<br>
 <br>
 <a href="../public/index.php">Retour à l'accueil</a>
 <div id="comments" class="text-left" style="margin-left: 50px">
@@ -62,7 +64,7 @@ if(!isset($_SESSION['login'])) {
 <h4>Ajouter un commentaire :</h4>
     <div>
         <form method="post" action="../public/index.php?route=addComment">
-            <label for="pseudo">Votre pseudo est posté automatiquement</label>
+            <label for="pseudo">Votre pseudo sera posté automatiquement</label>
             <br>
             <input type="hidden" name="pseudo" id="pseudo" value="<?= htmlspecialchars($_SESSION['pseudo']);?>" >
             <label for="content">Message</label><br>

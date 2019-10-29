@@ -54,6 +54,9 @@ class Router
                 else if($_GET['route'] === 'addArticle') {
                     $this->postController->addArticle($_POST);
                 }
+                else if($_GET['route'] === 'updateArticle') {
+                    $this->postController->updateArticle($_POST);
+                }
                 else if($_GET['route'] ==='addComment') {
                     $this->commentController->addComment($_POST);
                 }

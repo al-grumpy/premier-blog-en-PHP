@@ -16,10 +16,8 @@ class CommentController
         $this->view = new View();
     }
 
-    public function addComment($post) //A basculer dans CommentController avec condition de connexion
+    public function addComment($post) 
     {
-        
-
         if(isset($post['submit_comment']) && !isset($_SESSION['pseudo']) ) {
             session_start();
             $_SESSION['flash'] = 'Connectez-vous ou inscrivez-vous afin de pouvoir déposer des commentaires !';
@@ -37,5 +35,6 @@ class CommentController
             'post' => $post
         ]);
     }
+
 
 }

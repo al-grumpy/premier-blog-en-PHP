@@ -53,12 +53,12 @@ class ArticleDAO extends DAO
         $this->sql($sql, [$title, $chapo, $content, $author]);
     }
 
-    public function modifyArticle($idArt)
+    public function updateArticle($idArt)
     {
-        $sql = 'UPDATE title, chapo, content FROM article WHERE userId = ?';
-        $result = $this->sql($sql, [$idArt]);
+        extract($article);
+        $sql = 'UPDATE article SET title = ?, chapo = ?, content = ?, date_maj = NOW() WHERE id = ?';
+        $this->sql($sql, [$title, $chapo, $content, $date_maj]);
 
-        return $result;
     }
 
     private function buildObject(array $row)

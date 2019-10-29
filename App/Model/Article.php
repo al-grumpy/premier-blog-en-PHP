@@ -16,6 +16,8 @@ class Article
     
     private $date_added;
 
+    private $date_maj;
+
     
     /**
     * @return mixed
@@ -111,5 +113,21 @@ class Article
     public function setDateAdded($date_added)
     {
         $this->date_added = $date_added;
+    }
+
+    /**
+    * @return mixed
+    */
+    public function getDateMaj()
+    {
+        return $this->date_maj;
+    }
+    
+    /**
+    * @param mixed $date_maj
+    */
+    public function setDateMaj($date_maj)
+    {
+        $this->date_maj = $date_maj;
     }
 }
