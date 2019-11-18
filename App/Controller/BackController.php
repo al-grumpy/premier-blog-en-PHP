@@ -28,4 +28,5 @@ class BackController
             'post' => $post
         ]);
     }
+
 }

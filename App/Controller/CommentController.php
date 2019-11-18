@@ -36,5 +36,21 @@ class CommentController
         ]);
     }
 
+    public function checkComment($post)
+    {
+
+        if(isset($post['submit_confirme']) && isset($post['valide']) && isset($_SESSION['admin'])) {
+            $commentDAO = new CommentDAO();
+            $commentDAO->checkComment($post);
+            session_start();
+            $_SESSION['check_comment'] = 'le commentaire à bien été validé';
+            header('Location: ../public/index.php?gestionArticle&idArt='.$post['article_id']);
+
+        }
+        $this->view->render('gestion_admin', [
+            'post' => $post
+        ]);
+    }
+
 
 }

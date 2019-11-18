@@ -30,6 +30,10 @@ if(!isset($_SESSION['login'])) {
     echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
     echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
 }
+if(isset($_SESSION['update_article'])) {
+    echo '<p>'.$_SESSION['update_article'].'<p>';
+    unset($_SESSION['update_article']);
+}
 ?>
 
 <div class="container">
@@ -37,14 +41,23 @@ if(!isset($_SESSION['login'])) {
 <?php
 foreach ($articles as $article)
 {
+    
 ?>
 <hr>
+<?php
+    if(isset($_SESSION['login']) && $_SESSION['droit'] == 'admin'){
+?>
+        <button type="button"><a href="../public/index.php?route=gestionArticle&idArt=<?= htmlspecialchars($article->getId());?>"> Gestion article</button></a>
+<?php
+    }
+?>
     <div class="col-md-3 col-lg-3" style="text-align:center">
     <article>
         <h3><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>"><?= htmlspecialchars($article->getTitle());?></a></h3>
         <p><?= htmlspecialchars($article->getChapo());?></p>
         <p><?= htmlspecialchars($article->getAuthor());?></p>
         <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+        <p>Dernière mise à jour le : <?= htmlspecialchars($article->getDateMaj());?></p>
     </article>
     </div>
 <hr>

@@ -4,7 +4,7 @@ if(session_status() == PHP_SESSION_NONE) {
 }
 ?>
 <?php
-$this->title = "Article";
+$this->title = "Gestion article";
 ?>
 <?php
 if(isset($_SESSION['add_comment'])) {
@@ -19,7 +19,6 @@ if(isset($_SESSION['login']) && $_SESSION['droit'] == 'user') {
     echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
     echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
     echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
-    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
     echo '<p>'.$_SESSION['login'].'<p>';
 }
 if(!isset($_SESSION['login'])) {
@@ -27,7 +26,6 @@ if(!isset($_SESSION['login'])) {
     echo '<button type="button"><a href="../public/index.php?route=inscription">S\'inscrire</button></a>';
     echo '<button type="button"><a href="mailto:alexiaseurot@gmail.com">Me contacter</a>';
     echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
-    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
 }
 
 ?>
@@ -41,24 +39,59 @@ if(!isset($_SESSION['login'])) {
            <p><?= htmlspecialchars($article->getContent());?></p>
            <p>Auteur : <?= htmlspecialchars($article->getAuthor());?></p>
            <p>Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+           <p>Dernière mise à jour le : <?= htmlspecialchars($article->getDateMaj());?></p>
        </div>
        </div>
-
-
     <hr>
 
     </div>
 </div>
 <br>
 <br>
+<a href="../public/index.php">Retour à l'accueil</a>
 
-
+<div class="contain">
+    <div class="row">
+    <hr>
+    <h3>Modifier l'article</h3>
+    <hr>
+       <div class="col-xs-6" style="text-align:center">
+           <form method="post" action="../public/index.php?route=updateArticle">
+        <label type="title">Titre</label><br>
+        <textarea id="majTitle" name="majTitle" cols="40" value="<?php
+            if(isset($post['title'])){  
+                echo $post['title'];}
+        ?>">
+        </textarea>
+        <br>
+        <br>
+        <label for="chapo">Chapo</label><br>
+        <textarea id="majChapo" name="majChapo" rows="3" cols="40" value="><?php 
+            if(isset($post['chapo'])){
+                echo $post['chapo'];}
+        ?>">
+        </textarea>
+        <br>
+        <br>
+        <label for="content">Contenu</label><br>
+        <textarea id="majContent" name="majContent" rows="5" cols="40" value="><?php 
+            if(isset($post['content'])){
+                echo $post['contenu'];}
+        ?>">
+        </textarea>
+        <br>
+        <input type="hidden" name="article_id" id="article_id" value="<?php htmlspecialchars($_GET['idArt']) ?>" >
+        <input type="submit" value="Modifier article" id="majArticle" name="majArticle">
+        <br>
+        <br>
+    </form>
+       </div>
     <hr>
     </div>
 </div>
 
 <div id="comments" class="text-center" style="margin-left: 50px">
-    <h3>Commentaires :</h3>
+    <h3>Commentaires en attende de validation :</h3>
     <?php
     foreach ($comments as $comment)
     {
@@ -67,29 +100,14 @@ if(!isset($_SESSION['login'])) {
         <h4><?= htmlspecialchars($comment->getPseudo());?></h4>
         <p><?= htmlspecialchars($comment->getContent());?></p>
         <p>Posté le <?= htmlspecialchars($comment->getDateAdded());?></p>
+        <form method="post" action="../public/index.php?route=checkComment">
+            <input type="checkbox" value="1" id="valide" name="valide">Valider
+            <input type="checkbox" value="0" id="refuse" name="refuse">Refuser
+            <input type="hidden" name="comment_id" id="comment_id" value="<?= htmlspecialchars($comment->getId());?>" >
+            <input type="hidden" name="article_id" id="article_id" value="<?= htmlspecialchars($comment->getArticleId());?>" >
+            <input type="submit" value="Confirmer" id="submit_confirme" name="submit_confirme">
+        </form>
         <?php
     }
     ?>
-    <hr>
-</div>
-
-<div class="caption">
-<h2>Ajouter un commentaire :</h2>
-    <div class="caption">
-        <form method="post" action="../public/index.php?route=addComment" style="border">
-            <label for="pseudo">* Votre pseudo sera posté automatiquement</label>
-            <br>
-            <br>
-            <input type="hidden" name="pseudo" id="pseudo" value="<?= htmlspecialchars($_SESSION['pseudo']);?>" >
-            <label for="content">Entrez votre commentaire :</label><br>
-            <textarea id="content" name="content" rows="5" cols="40" required value="<?php 
-                if(isset($post['content'])){
-                    echo $post['content'];}
-            ?>">
-            </textarea><br>
-            <input type="hidden" name="article_id" id="article_id" value="<?= htmlspecialchars($article->getId());?>" >
-            <input type="submit" value="Envoyer" id="submit_comment" name="submit_comment">
-        </form>
-</div>
-
     </div>

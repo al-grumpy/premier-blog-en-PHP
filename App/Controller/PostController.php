@@ -54,15 +54,28 @@ class PostController
         ]);
     }
 
-    public function updateArticle($id)
+    public function updateArticle($post)
     {
         if (isset($post['submit_modif']) && isset($_SESSION['admin'])) {
             $articleDAO = new ArticleDAO();
-            $articleDAO->updateArticle($id);
+            $articleDAO->updateArticle($post);
             session_start();
             $_SESSION['update_article'] = 'Votre article à été mis à jour';
-            header('Location: ../public/index.php?route=article&idArt='.$post['id']);
+            header('Location: ../public/index.php?route=article&idArt='.$post['article_id']);
         }
-        $this->view->render('update_article');
+        $this->view->render('update_article', [
+            'post' => $post
+        ]);
+    }
+
+    public function gestionArticle($id){
+
+        $article = $this->articleDAO->getArticle($id);
+        $comments = $this->commentDAO->getCommentsCheckFromArticle($id);
+        $this->view->render('gestion_admin', [
+            'article' => $article,
+            'comments' => $comments
+        ]);
+
     }
 }

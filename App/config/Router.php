@@ -45,6 +45,9 @@ class Router
                 else if($_GET['route'] === 'allCommentsWaiting') {
                     $this->commentController->allCommentsWaiting();
                 }
+                else if($_GET['route'] === 'checkComment') {
+                    $this->commentController->checkComment($_POST);
+                }
                 else if($_GET['route'] === 'user') {
                     $this->userController->user($_GET['idUser']);
                 }
@@ -54,17 +57,23 @@ class Router
                 else if($_GET['route'] === 'addArticle') {
                     $this->postController->addArticle($_POST);
                 }
-                else if($_GET['route'] === 'updateArticle') {
-                    $this->postController->updateArticle($_POST);
+                else if($_GET['route'] === 'gestionArticle') {
+                    $this->postController->gestionArticle($_GET['idArt']);
                 }
                 else if($_GET['route'] ==='addComment') {
                     $this->commentController->addComment($_POST);
+                }
+                else if($_GET['route'] ==='updateArticle') {
+                    $this->postController->updateArticle($_POST);
                 }
                 else if($_GET['route'] ==='inscription') {
                     $this->userController->inscription();
                 }
                 else if($_GET['route'] ==='login') {
                     $this->userController->login();
+                }
+                else if($_GET['route'] ==='contact') {
+                    $this->frontController->contact();
                 }
                 else if($_GET['route'] ==='logout') {
                     $this->userController->logout();

@@ -33,6 +33,26 @@ class CommentDAO extends DAO
         }
 
     }
+
+    public function getCommentsCheckFromArticle($idArt)
+    {
+        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ? AND confirmed = 0';
+        $result = $this->sql($sql, [$idArt]);
+        $comments = [];
+        foreach ($result as $row) {
+            $commentId = $row['id'];
+            $comments[$commentId] = $this->buildObject($row);
+        }
+        
+        return $comments;
+    }
+
+    public function checkComment($comment)
+    {
+        extract($comment);
+        $sql = 'UPDATE comment SET confirmed = 1 WHERE id = ?';
+        $this->sql($sql, [$confirmed]);
+    }
     
     private function buildObject(array $row)
     {
