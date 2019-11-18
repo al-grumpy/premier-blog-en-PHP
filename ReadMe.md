@@ -26,3 +26,5 @@ do not forget to rename the connection information to your database in premier-b
 
 # Informations
 - use of the bootstrap theme : "Clean-blog" 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c5fc3477e04e44b78487155908e3135f)](https://www.codacy.com/manual/al-grumpy/premier-blog-en-PHP?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=al-grumpy/premier-blog-en-PHP&amp;utm_campaign=Badge_Grade)
