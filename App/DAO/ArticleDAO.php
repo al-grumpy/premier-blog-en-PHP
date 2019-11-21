@@ -60,6 +60,10 @@ class ArticleDAO extends DAO
         $this->sql($sql, [$title, $chapo, $content, $date_maj]);
 
     }
+    public function deleteArticle($id)
+    {
+        $sql = 'DELETE FROM article WHERE id = ?';
+    }
 
 
     private function buildObject(array $row)

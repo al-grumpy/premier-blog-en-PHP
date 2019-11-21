@@ -38,22 +38,21 @@ class CommentDAO extends DAO
     {
         $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ? AND confirmed = 0';
         $result = $this->sql($sql, [$idArt]);
-        $comments = [];
+        $commentsWaiting = [];
         foreach ($result as $row) {
             $commentId = $row['id'];
-            $comments[$commentId] = $this->buildObject($row);
+            $commentsWaiting[$commentId] = $this->buildObject($row);
         }
         
-        return $comments;
+        return $commentsWaiting;
     }
 
-    public function checkComment($comment)
+    public function confirmedComment($idCom)
     {
-        extract($comment);
         $sql = 'UPDATE comment SET confirmed = 1 WHERE id = ?';
-        $this->sql($sql, [$confirmed]);
+        $this->sql($sql, [$idCom]);
     }
-    
+
     private function buildObject(array $row)
     {
         $comment = new Comment();
@@ -64,4 +63,5 @@ class CommentDAO extends DAO
         
         return $comment;
     }
+    
 }

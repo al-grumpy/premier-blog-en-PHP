@@ -36,12 +36,12 @@ class CommentController
         ]);
     }
 
-    public function checkComment($post)
+    public function updateComment($id)
     {
-
+        
         if(isset($post['submit_confirme']) && isset($post['valide']) && isset($_SESSION['admin'])) {
-            $commentDAO = new CommentDAO();
-            $commentDAO->checkComment($post);
+            $commentDAO->getCommentCheckFromArticle($id);
+            $commentDAO->confirmedComment($id);
             session_start();
             $_SESSION['check_comment'] = 'le commentaire à bien été validé';
             header('Location: ../public/index.php?gestionArticle&idArt='.$post['article_id']);

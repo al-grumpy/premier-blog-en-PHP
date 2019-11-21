@@ -39,11 +39,14 @@ class Router
                 else if($_GET['route'] === 'allArticles') {
                     $this->postController->allArticles();
                 }
+                else if($_GET['route'] ==='deleteArticle'){
+                    $this->postController->deleteArticle($_GET['idArt']);
+                }
                 else if($_GET['route'] === 'allUsers') {
                     $this->userController->allUsers();
                 }
-                else if($_GET['route'] === 'allCommentsWaiting') {
-                    $this->commentController->allCommentsWaiting();
+                else if($_GET['route'] === 'allComments') {
+                    $this->commentController->allComments();
                 }
                 else if($_GET['route'] === 'checkComment') {
                     $this->commentController->checkComment($_POST);

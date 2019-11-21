@@ -8,20 +8,34 @@ $this->title = "Me contacter";
 ?>
 <?php
 
+if(isset($_SESSION['login']) && $_SESSION['droit'] == 'admin') { 
+    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allUsers">Tous les membres</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=addArticle">Déposer un article</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    
+}
 if(isset($_SESSION['login']) && $_SESSION['droit'] == 'user') {
-  echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
-  echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
-  echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
-  echo '<p>Bonjour '.$_SESSION['pseudo'].'<p>';
-  echo '<p>'.$_SESSION['login'].'<p>';
+    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    echo '<p>'.$_SESSION['login'].'<p>';
 }
 if(!isset($_SESSION['login'])) {
-  echo '<button type="button"><a href="../public/index.php?route=login">Se connecter</button></a>';
-  echo '<button type="button"><a href="../public/index.php?route=inscription">S\'inscrire</button></a>';
-  echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
-  echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=login">Se connecter</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=inscription">S\'inscrire</button></a>';
+    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+}
+if(isset($_SESSION['update_article'])) {
+    echo '<p>'.$_SESSION['update_article'].'<p>';
+    unset($_SESSION['update_article']);
 }
 ?>
+<br>
+<br>
+
 <form action="" method="post" >
 
 <fieldset>
@@ -39,8 +53,16 @@ if(!isset($_SESSION['login'])) {
    <input type="email" name="email" size="20" 
    maxlength="40" id="email" />
 
+   <label for="email">Votre nom :</label>
+   <input type="nom" name="nom" size="20" 
+   maxlength="40" id="nom" />
+
+   <label for="prenom">Votre prénom :</label>
+   <input type="prenom" name="prenom" size="20" 
+   maxlength="40" id="prenom" /><br><br>
+
   <label for="comments">Votre message :</label>
-   <textarea name="comments" id="comments" cols="80" rows="5">
+   <textarea name="comments" id="comments" cols="100" rows="5">
    </textarea>
 </fieldset>
 
