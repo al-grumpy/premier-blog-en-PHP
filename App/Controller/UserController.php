@@ -78,7 +78,7 @@ class UserController
         header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
     }
 
-    public function logout()
+    public function logout() //Disconnect user
     {
         session_start();
         session_unset();

@@ -17,16 +17,11 @@ if(isset($_SESSION['login']) && $_SESSION['droit'] == 'admin') {
     
 }
 if(isset($_SESSION['login']) && $_SESSION['droit'] == 'user') {
-    echo '<button type="button"><a href="../public/index.php?route=logout">Se déconnecter</button></a>';
     echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
-    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
     echo '<p>'.$_SESSION['login'].'<p>';
 }
 if(!isset($_SESSION['login'])) {
-    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';
-    echo '<button type="button"><a href="../public/index.php?route=login">Se connecter</button></a>';
-    echo '<button type="button"><a href="../public/index.php?route=inscription">S\'inscrire</button></a>';
-    echo '<button type="button"><a href="../public/index.php?route=allArticles">Tous les articles</button></a>';
+    echo '<button type="button"><a href="../public/index.php">Retour accueil</button></a>';;
 }
 if(isset($_SESSION['update_article'])) {
     echo '<p>'.$_SESSION['update_article'].'<p>';
