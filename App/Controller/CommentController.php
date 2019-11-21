@@ -16,10 +16,8 @@ class CommentController
         $this->view = new View();
     }
 
-    public function addComment($post) //A basculer dans CommentController avec condition de connexion
+    public function addComment($post) 
     {
-        
-
         if(isset($post['submit_comment']) && !isset($_SESSION['pseudo']) ) {
             session_start();
             $_SESSION['flash'] = 'Connectez-vous ou inscrivez-vous afin de pouvoir déposer des commentaires !';
@@ -37,5 +35,22 @@ class CommentController
             'post' => $post
         ]);
     }
+
+    public function updateComment($id)
+    {
+        
+        if(isset($post['submit_confirme']) && isset($post['valide']) && isset($_SESSION['admin'])) {
+            $commentDAO->getCommentCheckFromArticle($id);
+            $commentDAO->confirmedComment($id);
+            session_start();
+            $_SESSION['check_comment'] = 'le commentaire à bien été validé';
+            header('Location: ../public/index.php?gestionArticle&idArt='.$post['article_id']);
+
+        }
+        $this->view->render('gestion_admin', [
+            'post' => $post
+        ]);
+    }
+
 
 }

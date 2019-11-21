@@ -54,13 +54,47 @@ class PostController
         ]);
     }
 
-    public function modifyArticle($id)
+    public function updateArticle($id)
     {
-        if (isset($post['submit_modif'])) {
-            $article = $this->articleDAO->modifyArticle($id);
+        $article = $this->articleDAO->getArticle($id);
+        $comments = $this->commentDAO->getCommentsFromArticle($id);
+
+        if (isset($post['submit_modif']) && isset($_SESSION['admin'])) {
+            $title = $_POST['majTitle'];
+            $chapo = $_POST['majChapo'];
+            $content = $_POST['majContent'];
+            
+            $articleDAO->updateArticle($post);
             session_start();
-            $_SESSION['modify_article'] = 'Votre article à été mis à jour';
-            header('Location: ../public/index.php?route');
+            $_SESSION['update_article'] = 'Votre article à été mis à jour';
+            header('Location: ../public/index.php?route=article&idArt='.$post['article_id']);
         }
+        $this->view->render('update_article', [
+            'post' => $post
+        ]);
     }
+
+    public function gestionArticle($id){
+
+        $article = $this->articleDAO->getArticle($id);
+        $commentsWaiting = $this->commentDAO->getCommentsCheckFromArticle($id);
+        $comments = $this->commentDAO->getCommentsFromArticle($id);
+        $this->view->render('gestion_admin', [
+            'article' => $article,
+            'commentsWaiting' => $commentsWaiting,
+            'comments' => $comments
+        ]);
+
+    }
+
+    public function deleteArticle($id)
+    {
+        $article = $this->articleDAO->deleteArticle($id);
+        session_start();
+            $_SESSION['delete_article'] = 'Votre article à bien été supprimer';
+            header('Location: ../public/index.php?route=allArticles');
+        $this->view->render('all_articles');
+    }
+
+    
 }

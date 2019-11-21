@@ -15,20 +15,21 @@ $this->title = "Inscription";
 </div>
 <?php endif; ?>
 
+<div class="col-md-3 col-lg-3" style="text-align:center">
 <form method="post" action="../public/index.php?route=inscription">
         <label type="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo" value="<?php
-            if(isset($post['pseudo'])){  //Penser à mettre des contraintes dans input form
+            if(isset($post['pseudo'])){ 
                 echo $post['pseudo'];}
         ?>"><br>
         <label for="pass">Mot de passe</label><br>
         <input type="password" id="pass" name="pass" value="<?php
-            if(isset($post['pass'])){  //Penser à mettre des contraintes dans input form
+            if(isset($post['pass'])){  
                 echo $post['pass'];}
         ?>"><br>
         <label for="pass_confirm">Confirmation du mot de passe</label><br>
         <input type="password" id="pass_confirm" name="pass_confirm" value="<?php
-            if(isset($post['pass_confirm'])){  //Penser à mettre des contraintes dans input form
+            if(isset($post['pass_confirm'])){  
                 echo $post['pass_confirm'];}
         ?>"><br>
         <label for="mail">Adresse mail</label><br>

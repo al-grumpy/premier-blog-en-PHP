@@ -9,7 +9,7 @@ class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC LIMIT 2';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, date_maj FROM article ORDER BY id DESC LIMIT 2';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -22,7 +22,7 @@ class ArticleDAO extends DAO
     
     public function allArticles()
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article ORDER BY id DESC';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, date_maj FROM article ORDER BY id DESC';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -35,7 +35,7 @@ class ArticleDAO extends DAO
 
     public function getArticle($idArt)
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added FROM article WHERE id = ?';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, date_maj FROM article WHERE id = ?';
         $result = $this->sql($sql, [$idArt]);
         $row = $result->fetch();
         if($row) {
@@ -53,13 +53,18 @@ class ArticleDAO extends DAO
         $this->sql($sql, [$title, $chapo, $content, $author]);
     }
 
-    public function modifyArticle($idArt)
+    public function updateArticle($article)
     {
-        $sql = 'UPDATE title, chapo, content FROM article WHERE userId = ?';
-        $result = $this->sql($sql, [$idArt]);
+        extract($article);
+        $sql = 'UPDATE article SET title = ?, chapo = ?, content = ?, date_maj = NOW() WHERE id = ?';
+        $this->sql($sql, [$title, $chapo, $content, $date_maj]);
 
-        return $result;
     }
+    public function deleteArticle($id)
+    {
+        $sql = 'DELETE FROM article WHERE id = ?';
+    }
+
 
     private function buildObject(array $row)
     {
@@ -70,6 +75,7 @@ class ArticleDAO extends DAO
         $article->setContent($row['content']);
         $article->setAuthor($row['author']);
         $article->setDateAdded($row['date_added']);
+        $article->setDateMaj($row['date_maj']);
         
         return $article;
     }

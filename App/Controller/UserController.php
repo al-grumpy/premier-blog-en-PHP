@@ -20,42 +20,38 @@ class UserController
     public function inscription()
     {
         //Vérification des erreurs lors de la saisie 
-        if (empty($_POST) || !isset($_POST['submit'])) {
+        if (empty(htmlspecialchars($_POST)) || !isset($_POST['submit'])) {
             return $this->view->render('inscription');
         }
 
-        $errors = [];
-        if (empty($_POST['pseudo']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['pseudo'])){
-            $errors['pseudo'] = 'Votre pseudo est vide ou non valide';
-        }
+        $errors = array_filter([
+            'pseudo' => empty($_POST['pseudo']) || !preg_match('/^[a-zA-Z0-9_]+$/', htmlspecialchars($_POST['pseudo'])) ? 'Votre pseudo est vide ou non valide' : null,
+            'mail' => empty(htmlspecialchars($_POST['mail'])) || !filter_var(htmlspecialchars($_POST['mail'] , FILTER_VALIDATE_EMAIL)) ? 'Votre email est vide ou non valide' : null,
+            'pass' => empty(htmlspecialchars($_POST['pass'])) || htmlspecialchars($_POST['pass']) !== htmlspecialchars($_POST['pass_confirm']) ? 'Les mots de passe sont différents' : null,
+        ]);
 
-        if (empty($_POST['mail']) || !filter_var($_POST['mail'] , FILTER_VALIDATE_EMAIL)){
-            $errors['mail'] = "Votre email est vide ou non valide";
-        }
-        
-        if (empty($_POST['pass']) || $_POST['pass'] !== $_POST['pass_confirm']){
-            $errors['pass'] = "Les mots de passe sont différents";
+        if (false === empty($errors)) {
+            return $this->view->render('inscription', ['errors' => $errors]);
         }
 
         $userDAO = new UserDAO();
-        if ($userDAO->isUsernameExist($_POST['pseudo'])) {
-            $errors['pseudo'] = 'Ce pseudo n\'est pas disponible.';
+        if ($userDAO->isUsernameExist(htmlspecialchars($_POST['pseudo']))) {
+            return $this->view->render('inscription', ['errors' => ['pseudo' => 'Ce pseudo n\'est pas disponible.']]);
         }
-        //Si aucune erreur on valide l'inscription en passant par la methode inscription
-        if (empty($errors)) {
-            $userDAO->inscription($_POST); 
-            session_start();
-            $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos commentaires.';
-            header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
-        }   
-        $this->view->render('inscription');
+
+        $userDAO->inscription($_POST); 
+        session_start();
+        $_SESSION['inscription'] = 'Vous êtes bien inscrit, connectez-vous pour déposer vos commentaires.';
+        header('Location: ../public/index.php');
+
+        return $this->view->render('inscription');
     }
 
     //Se connecter
     public function login()
     {
         //Si les champs du formulaire sont envoyés vide alors retour formulaire connexion
-        if (!isset($_POST['submit_login']) || (empty($_POST['pseudo']) || empty($_POST['pass']))) {
+        if (!isset($_POST['submit_login']) || (empty(htmlspecialchars($_POST)))) {
             return $this->view->render('login');
         }
         
@@ -82,7 +78,7 @@ class UserController
         header('Location: ../public/index.php'); //Doit renvoyer sur formConnexion
     }
 
-    public function logout()
+    public function logout() //Disconnect user
     {
         session_start();
         session_unset();
@@ -109,4 +105,5 @@ class UserController
         
         ]);
     }
+
 }

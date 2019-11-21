@@ -26,4 +26,9 @@ class FrontController
             'articles' => $articles
         ]);
     }
+
+    public function contact()
+    {
+        $this->view->render('contact');
+    }
 }

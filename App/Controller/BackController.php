@@ -15,7 +15,7 @@ class BackController
         $this->view = new View();
     }
     
-    public function addArticle($post) //A basculer dans ArticleController avec condition de connexion
+    public function addArticle($post) //Add article in BdD
     {
         if(isset($post['submit'])) {
             $articleDAO = new ArticleDAO();
@@ -28,4 +28,5 @@ class BackController
             'post' => $post
         ]);
     }
+
 }

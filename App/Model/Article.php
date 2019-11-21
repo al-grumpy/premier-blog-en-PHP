@@ -16,7 +16,8 @@ class Article
     
     private $date_added;
 
-    private $user_id;
+    private $date_maj;
+
     
     /**
     * @return mixed
@@ -101,22 +102,6 @@ class Article
     /**
     * @return mixed
     */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
-    
-    /**
-    * @param mixed $user_id
-    */
-    public function setUserId($user_id)
-    {
-        $this->user_id = $user_id;
-    }
-    
-    /**
-    * @return mixed
-    */
     public function getDateAdded()
     {
         return $this->date_added;
@@ -128,5 +113,21 @@ class Article
     public function setDateAdded($date_added)
     {
         $this->date_added = $date_added;
+    }
+
+    /**
+    * @return mixed
+    */
+    public function getDateMaj()
+    {
+        return $this->date_maj;
+    }
+    
+    /**
+    * @param mixed $date_maj
+    */
+    public function setDateMaj($date_maj)
+    {
+        $this->date_maj = $date_maj;
     }
 }
